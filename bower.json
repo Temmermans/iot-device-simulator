@@ -1,0 +1,21 @@
+{
+  "name": "simple-node-server",
+  "description": "",
+  "main": "server.js",
+  "authors": [
+    "Temmermans <temmerman.simon@gmail.com>"
+  ],
+  "license": "ISC",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "public/bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "^2.2.3"
+  }
+}
