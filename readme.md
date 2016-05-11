@@ -4,7 +4,7 @@
 
 ### Info
 
-Simple node server with package.json (for back-end) and bower.json (for front-end) to clone and jumpstart a Javascript project. The setup is MVC. every file has comments to what its purpose exactly is.
+Simple node server with package.json (for back-end) and bower.json (for front-end) to clone and jumpstart a Javascript project. The setup is MVC. Every file has comments to what its purpose exactly is.
 
 Note: To serve the public directory, Nginx or V8 are better suited than node to do so.
 
