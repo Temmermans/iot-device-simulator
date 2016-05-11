@@ -11,8 +11,10 @@
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.15.0",
-    "errorhandler": "^1.4.3",
     "express": "^4.13.4",
-    "method-override": "^2.3.5"
+    "jade": "^1.11.0"
+  },
+  "devDependencies": {
+    "errorhandler": "^1.4.3"
   }
 }

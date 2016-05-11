@@ -1,25 +1,14 @@
 var express = require('express');
 var app = express();
-var bodyParser = require('body-parser');
-var errorHandler = require('errorhandler');
-var methodOverride = require('method-override');
-var port = parseInt(process.env.PORT, 10) || 3000;
 
-app.get("/", function(req, res) {
-   res.redirect("/index.html");
-});
+//set Jade as default templating engine
+app.engine('jade', require('jade').__express);
+app.set('view engine', 'jade');
 
-app.use(methodOverride());
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({
-  extended: true
-}));
-
+//Serve the static content and require all the controllers
 app.use(express.static('public'));
-app.use(errorHandler({
-  dumpExceptions: true,
-  showStack: true
-}));
+app.use(require('./controllers'));
 
-console.log("Simple static server running at localhost using port: " + port);
-app.listen(port);
+app.listen(3000, function(){
+  console.log("Server running at port 3000");
+});
