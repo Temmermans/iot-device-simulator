@@ -5,7 +5,7 @@ var express = require('express'),
    City = require('../models/resource');
 
 //optional if you want a prefix in youre routes
-//router.use('/API', require('./cities'));
+//router.use('/API', require('./resources'));
 
 router.get("/", function(req, res) {
    res.render("index");
