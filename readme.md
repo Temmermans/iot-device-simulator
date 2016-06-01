@@ -25,3 +25,9 @@ fire up the server by using the following command
 ```
 $ node ./bin/www
 ```
+
+To test the application, simply add files in the test folder (give them the same name as the resources they test) and run
+
+```
+$ npm test
+```
