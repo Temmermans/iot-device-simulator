@@ -23,5 +23,5 @@ $ npm install && bower install
 fire up the server by using the following command
 
 ```
-$ node server
+$ node ./bin/www
 ```
