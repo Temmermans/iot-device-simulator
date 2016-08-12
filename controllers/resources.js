@@ -15,4 +15,12 @@
 //   });
 // });
 //
+// router.post('/cities', jsonEncode, function(req, res, next) {
+//   City.create(req.body.name, req.body.desc, function(err) {
+//     if (err !== null) {
+//       next(err);
+//     }
+//   });
+// });
+// 
 // module.exports = router;

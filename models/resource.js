@@ -11,6 +11,16 @@
 ////////// REQUIRE ////////////////
 // var db = require(../nameofdatabase.db)
 
+//Create a new city in the Database
+// exports.create = function(name, desc, cb) {
+//   var city = {
+//     name: name,
+//     description: desc,
+//   };
+//
+//   db.run("INSERT INTO cities (name, description) VALUES ('" + city.name + "', '" + city.description + "')", cb);
+// };
+
 
 //create all functions and export them, for example return everything from a table
 // exports.all = function(cb) {

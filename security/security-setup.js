@@ -48,7 +48,7 @@ app.use(helmet.xssFilter());
 //   res.status(403);
 //   res.send("CSRF error.");
 // });
-app.use(csrf());
+// app.use(csrf());
 
 //disable the header so its not immediatly clear that this is an express application
 app.disable("x-powered-by");
