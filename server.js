@@ -4,9 +4,9 @@ var bodyParser = require('body-parser');
 var session = require('express-session');
 var app = express();
 
-//set Jade as default templating engine
-app.engine('jade', require('jade').__express);
-app.set('view engine', 'jade');
+//set Pug as default templating engine
+app.engine('pug', require('pug').__express);
+app.set('view engine', 'pug');
 
 //the default store is not for production usage. Install a store compatible with the db you are using from: https://github.com/expressjs/session#compatible-session-stores
 //this is also a dependency of csurf

@@ -1,6 +1,7 @@
 {
   "name": "simple-node-server",
   "version": "1.0.0",
+  "private": true,
   "description": "",
   "main": "server.js",
   "scripts": {
@@ -17,9 +18,9 @@
     "express-session": "^1.13.0",
     "forever": "^0.15.2",
     "helmet": "^2.1.0",
-    "jade": "^1.11.0",
     "morgan": "^1.7.0",
-    "ms": "^0.7.1"
+    "ms": "^0.7.1",
+    "pug": "^2.0.0-beta5"
   },
   "devDependencies": {
     "chai": "^3.5.0",
