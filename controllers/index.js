@@ -1,4 +1,4 @@
-//the index.js file requires all other controllers plus defines some general routes that are not linked to a resource, like the home routes
+//the index.js file requires all other controllers plus defines some general routes that are not linked to a resource, like the home route
 
 var express = require('express'),
    router = express.Router()

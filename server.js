@@ -16,6 +16,51 @@ app.set('view engine', 'pug');
 //   saveUninitialized: true
 // }));
 
+// use domains for better error handling
+app.use(function(req, res, next){
+    // create a domain for this request
+    var domain = require('domain').create();
+    // handle errors on this domain
+    domain.on('error', function(err){
+        console.error('DOMAIN ERROR CAUGHT\n', err.stack);
+        try {
+            // failsafe shutdown in 5 seconds
+            setTimeout(function(){
+                console.error('Failsafe shutdown.');
+                process.exit(1);
+            }, 5000);
+
+            // disconnect from the cluster
+            var worker = require('cluster').worker;
+            if(worker) worker.disconnect();
+
+            // stop taking new requests
+            server.close();
+
+            try {
+                // attempt to use Express error route
+                next(err);
+            } catch(error){
+                // if Express error route failed, try
+                // plain Node response
+                console.error('Express error mechanism failed.\n', error.stack);
+                res.statusCode = 500;
+                res.setHeader('content-type', 'text/plain');
+                res.end('Server error.');
+            }
+        } catch(error){
+            console.error('Unable to send 500 response.\n', error.stack);
+        }
+    });
+
+    // add the request and response objects to the domain
+    domain.add(req);
+    domain.add(res);
+
+    // execute the rest of the request chain in the domain
+    domain.run(next);
+});
+
 app.use(express.static(__dirname + '/public'))
 
 //log all the requests
@@ -27,8 +72,7 @@ app.use(bodyParser.urlencoded({ extended: false }))
 
 //setup security
 app.use(require('./security/security-setup'))
-//Serve the static content and require all the controllers
-
+//require all the controllers
 app.use(require('./controllers'))
 //errorhandling middleware
 app.use(require('./controllers/errorhandling'))
