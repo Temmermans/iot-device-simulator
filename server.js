@@ -73,7 +73,7 @@ app.use(bodyParser.urlencoded({ extended: false }))
 //setup security
 app.use(require('./security/security-setup'))
 //require all the controllers
-app.use(require('./controllers'))
+app.use(require('./controllers/index'))
 //errorhandling middleware
 app.use(require('./controllers/errorhandling'))
 

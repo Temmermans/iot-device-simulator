@@ -7,7 +7,7 @@ var express = require('express'),
 //router.use('/API', require('./resources'));
 
 //require all other controllers
-// router.use('/resources', require('./resources'));
+router.use('/user', require('./resources'));
 
 router.get("/", function(req, res) {
    res.render("index");

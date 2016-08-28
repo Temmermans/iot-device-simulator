@@ -1,6 +1,15 @@
 //create a controller file for every model. A good convention is to pluralize it
 //the controller has everything to do with routing relative to the resourece
 
+var express = require('express'),
+    router = express.Router()
+
+router.get('/:name', function(req, res, next){
+  res.send('Hi ' + req.params.name);
+});
+
+module.exports = router;
+
 // var express = require('express')
 // var router = express.Router()
 //     City = require('../models/resource');
