@@ -1,5 +1,5 @@
 //create a controller file for every model. A good convention is to pluralize it
-//the controller has everything to do with routing relative to the resourece
+//the controller has everything to do with routing relative to the resourecs
 
 var express = require('express'),
     router = express.Router()
