@@ -2,11 +2,12 @@ var express = require('express');
 var logger = require('morgan');
 var bodyParser = require('body-parser');
 var session = require('express-session');
+var exphbs  = require('express-handlebars');
 var app = express();
 
-//set Pug as default templating engine
-app.engine('pug', require('pug').__express);
-app.set('view engine', 'pug');
+//set handlebars as default templating engine
+app.engine('handlebars', exphbs({defaultLayout: 'layout'}));
+app.set('view engine', 'handlebars');
 
 //the default store is not for production usage. Install a store compatible with the db you are using from: https://github.com/expressjs/session#compatible-session-stores
 //this is also a dependency of csurf

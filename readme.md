@@ -6,7 +6,7 @@
 
 Simple node server with package.json (for back-end) and bower.json (for front-end) to clone and jumpstart a Javascript project. The setup is MVC. Every file has comments to what its purpose exactly is.
 
-Note: To serve the public directory, Nginx or V8 are better suited than node to do so.
+Gulp, babel and the foundation framework are included to ensure maximum modularity.
 
 ### Use
 
@@ -23,16 +23,22 @@ $ npm install && bower install
 fire up the server by using the following command
 
 ```
-$ node ./bin/www
+$ npm run start
 ```
 
 To test the application, simply add files in the test folder (give them the same name as the resources they test) and run
 
 ```
-$ grunt test
+$ npm run test
 ```
 
-### Node Inspector
+There is a build process set up with gulp that minifies, uglifies and compresses the static resources, run the following command to use them
+
+```
+$ npm run gulp
+```
+
+### Node Inspector (or use build in debugger in atom)
 
 To use the node inspector follow the following steps:
 ```
@@ -56,13 +62,65 @@ Commands:
 3. Step into next function call (F11)
 4. Step out of current function (Shift-F11)
 
-### Grunt
+### Git workflow and Heroku
 
-Run the following command to compile LESS to CSS, minify, bundle and hash all the static resource files.
-
+The repo has following braches that have to following flow
 ```
-$ grunt bunminify
+development -> staging -> production (master)
+```
+## Development
+Development is the first step that happens on the localhost. From this branch, features branches can be created and merged back into the development branch
+using the following git commands:
+```
+$ git checkout -b feature
 ```
 
-### ToDo
-- Heroku
+This will create a new branch and immediatly switches to it. Merge it back with development using the following git command:
+```
+$ git checkout development
+$ git merge feature
+```
+
+After the merge you no longer need the branch so delete it
+```
+$ git branch -d feature
+```
+## Staging
+After the work and tests in development on the localhost are done, its time to merge the development branch in the staging branch to start tests in a production
+env in Heroku.
+```
+$ git checkout staging
+$ git merge development
+```
+
+In Heroku, to create a staging app, run the following command:
+```
+$ heroku create --remote staging
+```
+
+To push to the staging app, run the following command (not the normal git push heroku master):
+```
+$ git push staging master
+```
+
+This will run the app still in a test app but still in the same env the production app will be running
+more info can be found on the following url: https://devcenter.heroku.com/articles/multiple-environments
+
+## Production
+
+This is the master branch and the app we will present to the userbase. To merge staging into production use following commands:
+```
+$ git checkout master
+$ git merge staging
+```
+
+Then create a production app and push to it:
+```
+$ heroku create --remote production <appName>
+$ git push production master
+```
+
+# Note
+In the development and staging branch both the src folder and the public folder will be checked in. In the master branch, the src folder is in the gitignore file
+since this will only take up more app space and this is not necessary for the working of the app (all necessary files will be in the public directory after running the gulp
+command and this is the directory that will be served by express)

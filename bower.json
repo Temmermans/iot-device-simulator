@@ -1,7 +1,6 @@
 {
   "name": "simple-node-server",
   "description": "",
-  "main": "server.js",
   "authors": [
     "Temmermans <temmerman.simon@gmail.com>"
   ],
@@ -10,12 +9,14 @@
   "ignore": [
     "**/.*",
     "node_modules",
-    "bower_components",
     "public/bower_components",
     "test",
     "tests"
   ],
   "dependencies": {
-    "jquery": "^2.2.3"
-  }
+    "jquery": "^2.2.3",
+    "foundation-sites": "~6.2.3",
+    "motion-ui": "~1.2.2"
+  },
+  "private": true
 }
