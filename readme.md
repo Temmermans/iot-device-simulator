@@ -124,3 +124,12 @@ $ git push production master
 In the development and staging branch both the src folder and the public folder will be checked in. In the master branch, the src folder is in the gitignore file
 since this will only take up more app space and this is not necessary for the working of the app (all necessary files will be in the public directory after running the gulp
 command and this is the directory that will be served by express)
+
+To push to a certain branch, run the following commands:
+```
+$ git checkout -b <branch>
+$ git push -u origin <branch>
+```
+
+### Foundation
+For the foundation for sites doc, visit this url: http://foundation.zurb.com/sites/docs/installation.html
