@@ -15,8 +15,7 @@
   ],
   "dependencies": {
     "jquery": "^2.2.3",
-    "foundation-sites": "~6.2.3",
-    "motion-ui": "~1.2.2"
+    "bootstrap": "^3.3.7"
   },
   "private": true
 }

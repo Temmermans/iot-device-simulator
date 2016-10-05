@@ -1,13 +1,16 @@
 module.exports = function(app) {
   app.get("/", function(req, res) {
      res.render("pages/index");
-  })
+  });
 
   app.get('/:name', function(req, res, next){
     res.send('Hi ' + req.params.name);
-  })
+  });
 
-  // Errorhandling =============================================================
+  //resource routes
+  // app.get('/resource', require('../views/pages/resource/index').find);
+
+// Errorhandling ===============================================================
 
   // catch 404 and forward to error handler
   app.use(function(req, res, next) {
@@ -37,4 +40,4 @@ module.exports = function(app) {
       error: {}
     });
   });
-}
+};
