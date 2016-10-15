@@ -15,7 +15,8 @@
   ],
   "dependencies": {
     "jquery": "^2.2.3",
-    "bootstrap": "^3.3.7"
+    "bootstrap": "^3.3.7",
+    "socket.io-client": "^1.5.0"
   },
   "private": true
 }

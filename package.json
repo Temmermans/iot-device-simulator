@@ -26,7 +26,9 @@
     "helmet": "^2.1.0",
     "morgan": "^1.7.0",
     "ms": "^0.7.1",
-    "socket.io": "^1.4.8"
+    "redis": "^2.6.2",
+    "socket.io": "^1.4.8",
+    "socket.io-redis": "^1.1.1"
   },
   "devDependencies": {
     "chai": "^3.5.0",

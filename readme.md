@@ -4,16 +4,24 @@
 
 ### Info
 
-Simple node server with package.json (for back-end) and bower.json (for front-end) to clone and jumpstart a Javascript project. The setup is MVC. Every file has comments to what its purpose exactly is.
+Simple node server with package.json (for back-end) and bower.json (for front-end) to clone and jumpstart a Javascript project. Every file has comments to what its purpose exactly is.
 
-Gulp, babel and the foundation framework are included to ensure maximum modularity.
+### Socket.io
+
+Socket.io is setup to work with the clusters and ./bin/www file so the back and front-end can communicate using websockets. Solution is implemented using the following blog (with redis-io to make sure the requests go to the correct process):
+
+https://github.com/squivo/chat-example-cluster, http://stackoverflow.com/questions/24609991/using-socket-io-in-express-4-and-express-generators-bin-www and
+https://github.com/socketio/socket.io-redis/issues/31
+
+See this example on the socket.io site to see how it works to emit and listen for events: http://socket.io/get-started/chat/
 
 ### Use
 
-Clone the project with following command
+Clone the project with following command and set to a new origin in a new repository:
 
 ```
 $ git clone https://Temmermans@bitbucket.org/Temmermans/simple-node-server.git
+$ git remote set-url origin https://github.com/USERNAME/OTHERREPOSITORY.git
 ```
 cd in the project and install npm and bower dependecies
 
@@ -32,10 +40,10 @@ To test the application, simply add files in the test folder (give them the same
 $ npm run test
 ```
 
-There is a build process set up with gulp that minifies, uglifies and compresses the static resources, run the following command to use them
+Npm is used as the build and package manager. Look at the package.json file to see what scripts can be run. For example:
 
 ```
-$ npm run gulp
+$ npm run build:js
 ```
 
 ### Node Inspector (or use build in debugger in atom)
@@ -130,6 +138,3 @@ To push to a certain branch, run the following commands:
 $ git checkout -b <branch>
 $ git push -u origin <branch>
 ```
-
-### Foundation
-For the foundation for sites doc, visit this url: http://foundation.zurb.com/sites/docs/installation.html
