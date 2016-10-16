@@ -4,13 +4,28 @@
   "private": true,
   "description": "",
   "main": "server.js",
+  "watch": {
+    "watch:js": "src/assets/js/*.js",
+    "watch:less": {
+      "patterns": "src/assets/less",
+      "extensions": "less"
+    },
+    "watch:img": {
+      "patterns": "src/assets/img",
+      "extensions": "jpg,jpeg,svg,png,ico"
+    }
+  },
   "scripts": {
+    "watch": "npm-watch",
     "start": "node ./bin/www",
     "postinstall": "bower install",
     "test": "mocha test",
-    "build:css": "lessc src/assets/less/app.less public/css/app.min.css -x",
+    "build:css": "lessc src/assets/less/main.less public/css/app.min.css -x",
+    "watch:less": "npm run build:css",
     "build:js": "uglifyjs src/assets/js/*.js -o public/js/app.min.js",
+    "watch:js": "npm run build:js",
     "build:img": "imagemin src/assets/img/* --out-dir=public/img",
+    "watch:img": "npm run build:img",
     "build": "npm run build:css && npm run build:js && npm run build:img"
   },
   "author": "",
@@ -41,6 +56,7 @@
     "less": "^2.7.1",
     "minifier": "^0.8.0",
     "mocha": "^2.5.3",
+    "npm-watch": "^0.1.6",
     "rimraf": "^2.4.3",
     "supertest": "^1.2.0",
     "uglify-js": "^2.7.3"

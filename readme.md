@@ -43,8 +43,10 @@ $ npm run test
 Npm is used as the build and package manager. Look at the package.json file to see what scripts can be run. For example:
 
 ```
-$ npm run build:js
+$ npm run watch
 ```
+
+This command will watch for changes in every file of the src folder and run the appropriate command to compile less, minify js or minify images.
 
 ### Node Inspector (or use build in debugger in atom)
 
