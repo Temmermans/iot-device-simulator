@@ -1,28 +1,15 @@
 //here goes everything that interacts with the database, starting by creating or requiring the db
+var mongo = require('mongodb');
+var mongoose = require('mongoose');
+var mongoUrl = require('../lib/config').credentials.mongodb.url;
 
-////////// CREATE ////////////////
-// var fs = require('fs');
-// var file = 'cities.db';
-// var exists = fs.existsSync(file);
-//
-// var sqlite3 = require('sqlite3').verbose();
-// var db = new sqlite3.Database('cities.db');
+// set up our mongodb database
+mongoose.connect(mongoUrl);
+//set a variable to hold this connection
+var db = mongoose.connection;
 
-////////// REQUIRE ////////////////
-// var db = require(../nameofdatabase.db)
+var nameSchema = mongoose.Schema({
+  name: {type: String}
+});
 
-//Create a new city in the Database
-// exports.create = function(name, desc, cb) {
-//   var city = {
-//     name: name,
-//     description: desc,
-//   };
-//
-//   db.run("INSERT INTO cities (name, description) VALUES ('" + city.name + "', '" + city.description + "')", cb);
-// };
-
-
-//create all functions and export them, for example return everything from a table
-// exports.all = function(cb) {
-//     db.get("SELECT * FROM cities", cb);
-// };
+var Name = module.exports = mongoose.model('Name', nameSchema);

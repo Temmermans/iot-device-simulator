@@ -59,7 +59,7 @@ if (cluster.isMaster) {
   * Set up socket.io to let the client and server communicate. Use redis to make
   * sure this works using different clusters
   */
-  require('../lib/events')(io);
+  require('../app/lib/events')(io);
 
   server.on('error', onError);
   server.on('listening', onListening);

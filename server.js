@@ -9,7 +9,7 @@ var helmet = require('helmet');
 var app = express();
 
 //setup security ===============================================================
-require('./lib/security-setup')(app, helmet);
+require('./app/lib/security-setup')(app, helmet);
 
 // configuration ===============================================================
 app.use(logger('dev')); // log every request to the console
@@ -25,6 +25,8 @@ app.set('view engine', 'handlebars');
 
 // serve the static content ====================================================
 app.use(express.static(__dirname + '/public'));
+
+// set up global variables =====================================================
 
 // routes ======================================================================
 require('./app/routes.js')(app); // load our routes and pass in our app

@@ -1,6 +1,6 @@
 module.exports = function(app) {
   app.get("/", function(req, res) {
-     res.render("pages/index");
+    res.render("index");
   });
 
   app.get('/:name', function(req, res, next){
@@ -8,7 +8,7 @@ module.exports = function(app) {
   });
 
   //resource routes
-  // app.get('/resource', require('../views/pages/resource/index').find);
+  app.get('/users/names', require('../views/resource/index').find);
 
 // Errorhandling ===============================================================
 
@@ -24,7 +24,7 @@ module.exports = function(app) {
   if (app.get('env') === 'development') {
     app.use(function(err, req, res, next) {
       res.status(err.status || 500);
-      res.render('pages/error', {
+      res.render('error', {
         message: err.message,
         error: err
       });
@@ -35,7 +35,7 @@ module.exports = function(app) {
   // no stacktraces leaked to user
   app.use(function(err, req, res, next) {
     res.status(err.status || 500);
-    res.render('pages/error', {
+    res.render('error', {
       message: err.message,
       error: {}
     });

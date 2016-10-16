@@ -24,6 +24,8 @@
     "express-handlebars": "^3.0.0",
     "express-session": "^1.13.0",
     "helmet": "^2.1.0",
+    "mongodb": "^2.2.10",
+    "mongoose": "^4.6.3",
     "morgan": "^1.7.0",
     "ms": "^0.7.1",
     "redis": "^2.6.2",
