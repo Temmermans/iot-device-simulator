@@ -37,6 +37,12 @@ app.set('view engine', 'handlebars');
 app.use(express.static(__dirname + '/public'));
 
 // set up global variables =====================================================
+app.use(function(req, res, next) {
+  res.locals.message_success = req.flash('message_success');
+  res.locals.message_failure = req.flash('message_failure');
+  res.locals.message_validation_errors = req.flash('message_validation_errors');
+  next();
+});
 
 // routes ======================================================================
 require('./app/routes.js')(app); // load our routes and pass in our app
