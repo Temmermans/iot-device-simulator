@@ -15,6 +15,16 @@ require('./app/lib/security-setup')(app, helmet);
 app.use(logger('dev')); // log every request to the console
 
 // set up our express application ==============================================
+
+// setup connect flash so we can sent messages
+app.use(cookieParser('secretString'));
+app.use(session({
+  secret: "@lHJr+JrSwv1W&J904@W%nmWf++K99pRBvk&wBaNAs4JTid1Ji",
+  resave: false,
+  saveUninitialized: true
+}));
+app.use(flash());
+
 // Make the body object available on the request
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
