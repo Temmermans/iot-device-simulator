@@ -1,5 +1,5 @@
 // all routes that are needed for the resource
-var Name = require('../../app/models/resource');
+var Name = require('../models/resource');
 
 exports.find = function(req, res, next) {
   // route handlers go here

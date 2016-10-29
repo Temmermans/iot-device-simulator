@@ -8,7 +8,7 @@ module.exports = function(app) {
   });
 
   //resource routes
-  app.get('/users/names', require('../views/resource/index').find);
+  app.get('/users/names', require('./controllers/resources').find);
 
 // Errorhandling ===============================================================
 
