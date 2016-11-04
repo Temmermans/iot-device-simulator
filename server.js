@@ -13,6 +13,7 @@ require('./app/lib/security-setup')(app, helmet);
 
 // configuration ===============================================================
 app.use(logger('dev')); // log every request to the console
+app.io = require('socket.io')(); // set socket io in the app object
 
 // set up our express application ==============================================
 
@@ -45,7 +46,7 @@ app.use(function(req, res, next) {
 });
 
 // routes ======================================================================
-require('./app/routes.js')(app); // load our routes and pass in our app
+require('./app/routes.js')(app, app.io); // load our routes and pass in our app and socket.io so we can use io.emit in our routes
 
 // export so bin/www can launch ================================================
 module.exports = app;

@@ -9,7 +9,6 @@ var cluster = require('cluster');
 var debug = require('debug')('temp:server');
 var http = require('http');
 var numCPUs = process.env.WORKERS || require('os').cpus().length;
-var io = require('socket.io');
 var redis = require('redis');
 var redisAdapter = require('socket.io-redis');
 
@@ -50,7 +49,7 @@ if (cluster.isMaster) {
    * Listen on provided port, on all network interfaces.
    */
 
-  var io = io.listen( server );
+  var io = app.io.listen( server );
   io.adapter(redisAdapter( redisUrl ));
 
   server.listen(port);
