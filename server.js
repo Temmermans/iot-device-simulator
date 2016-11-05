@@ -6,14 +6,19 @@ var exphbs  = require('express-handlebars');
 var cookieParser = require('cookie-parser');
 var flash = require('connect-flash');
 var helmet = require('helmet');
+var redis = require('redis');
+var redisAdapter = require('socket.io-redis');
 var app = express();
+var server = require('http').Server(app);
+var io = require('socket.io')(server);
+// use the redis adapter to create sticky sessions, this is needed because of the different clusters
+io.adapter(redisAdapter( require('./app/lib/config').credentials.redis.url ));
 
 //setup security ===============================================================
 require('./app/lib/security-setup')(app, helmet);
 
 // configuration ===============================================================
 app.use(logger('dev')); // log every request to the console
-app.io = require('socket.io')(); // set socket io in the app object
 
 // set up our express application ==============================================
 
@@ -39,6 +44,9 @@ app.use(express.static(__dirname + '/public'));
 
 // set up global variables =====================================================
 app.use(function(req, res, next) {
+  //set the io object on the response, so we can access it in our routes
+  res.io = io;
+  //set some global variables to make use of flash easier
   res.locals.message_success = req.flash('message_success');
   res.locals.message_failure = req.flash('message_failure');
   res.locals.message_validation_errors = req.flash('message_validation_errors');
@@ -46,7 +54,7 @@ app.use(function(req, res, next) {
 });
 
 // routes ======================================================================
-require('./app/routes.js')(app, app.io); // load our routes and pass in our app and socket.io so we can use io.emit in our routes
+require('./app/routes.js')(app); // load our routes and pass in our app
 
 // export so bin/www can launch ================================================
-module.exports = app;
+module.exports = {app: app, server: server};

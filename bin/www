@@ -4,15 +4,11 @@
  * Module dependencies.
  */
 
-var app = require('../server');
+var app = require('../server').app;
 var cluster = require('cluster');
 var debug = require('debug')('temp:server');
 var http = require('http');
 var numCPUs = process.env.WORKERS || require('os').cpus().length;
-var redis = require('redis');
-var redisAdapter = require('socket.io-redis');
-
-var redisUrl = process.env.REDISTOGO_URL || 'redis://127.0.0.1:6379';
 
 /**
  * Get port from environment and store in Express.
@@ -43,22 +39,12 @@ if (cluster.isMaster) {
    * Create HTTP server.
    */
 
-  var server = http.createServer(app);
+  var server = require('../server').server;
 
   /**
    * Listen on provided port, on all network interfaces.
    */
-
-  var io = app.io.listen( server );
-  io.adapter(redisAdapter( redisUrl ));
-
   server.listen(port);
-
-  /**
-  * Set up socket.io to let the client and server communicate. Use redis to make
-  * sure this works using different clusters
-  */
-  require('../app/lib/events')(io);
 
   server.on('error', onError);
   server.on('listening', onListening);

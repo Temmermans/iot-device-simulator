@@ -1,6 +1,9 @@
-module.exports = function(app, io) {
+module.exports = function(app) {
   app.get("/", function(req, res) {
     res.render("index");
+    res.io.on('connection', function(socket) {
+      socket.emit('home route');
+    })
   });
 
   app.get('/:name', function(req, res, next){
