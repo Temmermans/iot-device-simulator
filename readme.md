@@ -20,7 +20,7 @@ See this example on the socket.io site to see how it works to emit and listen fo
 Clone the project with following command and set to a new origin in a new repository:
 
 ```
-$ git clone https://Temmermans@bitbucket.org/Temmermans/simple-node-server.git
+$ git clone https://Temmermans@bitbucket.org/temsim/simple-node-server.git
 $ git remote set-url origin https://github.com/USERNAME/OTHERREPOSITORY.git
 ```
 cd in the project and install npm and bower dependecies
