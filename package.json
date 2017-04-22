@@ -1,5 +1,5 @@
 {
-  "name": "simple-node-server",
+  "name": "delaware-insights-webserver",
   "version": "1.0.0",
   "private": true,
   "description": "",
@@ -32,20 +32,12 @@
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.15.0",
-    "connect-flash": "^0.1.1",
-    "cookie-parser": "^1.4.3",
-    "csurf": "^1.9.0",
     "express": "^4.13.4",
     "express-handlebars": "^3.0.0",
-    "express-session": "^1.13.0",
+    "express-subdomain": "^1.0.5",
     "helmet": "^2.1.0",
-    "mongodb": "^2.2.10",
-    "mongoose": "^4.6.3",
     "morgan": "^1.7.0",
-    "ms": "^0.7.1",
-    "redis": "^2.6.2",
-    "socket.io": "^1.4.8",
-    "socket.io-redis": "^1.1.1"
+    "ms": "^0.7.1"
   },
   "devDependencies": {
     "chai": "^3.5.0",
