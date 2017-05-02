@@ -3,14 +3,12 @@ var logger = require('morgan');
 var bodyParser = require('body-parser');
 var exphbs  = require('express-handlebars');
 var helmet = require('helmet');
-var subdomain = require('express-subdomain');
-var apiRouter = express.Router();
-var appRouter = express.Router();
+var subdomain = require('subdomain');
 var app = express();
 var server = require('http').Server(app);
 
 //setup security ===============================================================
-require('./app/lib/security-setup')(app, helmet);
+require('./app/shared/security-setup')(app, helmet);
 
 // configuration ===============================================================
 app.use(logger('dev')); // log every request to the console
@@ -28,15 +26,12 @@ app.set('view engine', 'handlebars');
 // serve the static content 
 app.use(express.static(__dirname + '/public'));
 
-// mount the routes and subdomains
+// mount the routes and subdomains (SUBDOMAIN_BASE own declared var with heroku config:set SUBDOMAIN_BASE=delaware-insights --remote production)
+app.use(subdomain({ base : process.env.SUBDOMAIN_BASE || 'localhost', removeWWW : true }));
+require('./app/routes.js')(app); // load our routes and pass in our app
 
-// ===== Web Application ======== //
-require('./app/routes.js')(app, appRouter); // load our routes and pass in our app
-app.use(appRouter);
-
-// ===== API service ============ //
-require('./api/routes.js')(apiRouter);
-app.use(subdomain('api', apiRouter));
+// errorhandling
+require('./app/shared/errorhandling.js')(app);
 
 // export so bin/www can launch ================================================
 module.exports = {app: app, server: server};
