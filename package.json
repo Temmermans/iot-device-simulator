@@ -19,7 +19,7 @@
     "watch": "npm-watch",
     "start": "node ./bin/www",
     "dev": "nodemon ./bin/www",
-    "postinstall": "bower install && node heroku-build.js",
+    "postinstall": "bower install",
     "test": "mocha test",
     "build:css": "lessc src/assets/less/main.less public/css/app.min.css -x",
     "watch:less": "npm run build:css",
