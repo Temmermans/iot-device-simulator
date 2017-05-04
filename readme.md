@@ -1,10 +1,8 @@
 # Iot Device Simulator
 
-[![Build Status](https://travis-ci.org/travis-ci/travis-web.png?branch=master)](https://travis-ci.org/travis-ci/travis-web)
-
 ### Info
 
-This package can be used to deploy an IoT device simulator on your local machine. Can be used in conjunction with SDS.
+This package can be used to deploy an IoT device simulator on your local machine. Can be used in conjunction with SDS to build demo's and prototypes.
 
 ### Use
 
@@ -52,7 +50,7 @@ This package can be used to deploy an IoT device simulator on your local machine
 If you an access-Control-Allow-Origin error install following chrome extension: Allow-Control-Allow-Origin and enable it, make sure the icon is green and then try again.
 If using other sites, makes sure to turn it off again.
 
-![alt text](./readme-images/chrome-extension.png) ---
+![alt text](./readme-images/chrome-extension.png)
 
 ### ToDo
 
@@ -62,5 +60,4 @@ If using other sites, makes sure to turn it off again.
 - Form Validation
 - Document Walkthrough
 - If no pictures are selected, give default
-- remove IoT subdomain (was just an experiment)
 - ...
