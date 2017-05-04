@@ -1,8 +1,8 @@
 {
-  "name": "delaware-insights-webserver",
+  "name": "iot-device-simulator",
   "version": "1.0.0",
   "private": true,
-  "description": "",
+  "description": "Device Simulator to easily prototype",
   "main": "server.js",
   "watch": {
     "watch:js": "src/assets/js/*.js",
@@ -29,7 +29,8 @@
     "watch:img": "npm run build:img",
     "build": "npm run build:css && npm run build:js && npm run build:img"
   },
-  "author": "",
+  "author": "Simon Temmerman",
+  "email": "simon.temmerman@delaware.pro",
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.15.0",
