@@ -1,0 +1,202 @@
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+            <a class="navbar-brand" href="#">IoT Simulator</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="#">Link</a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">Action</a></li>
+                        <li><a href="#">Another action</a></li>
+                        <li><a href="#">Something else here</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="#">Separated link</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container-fluid -->
+</nav>
+
+
+<div class="container" style="margin-top:60px">
+
+    <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+        <div class="panel panel-default">
+            <div class="panel-heading" role="tab" id="headingOne">
+                <h4 class="panel-title">
+                    <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+              Create Devices
+            </a>
+                </h4>
+            </div>
+            <div id="collapseCreateDevices" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+                <div class="panel-body">
+                    <p>How many devices would you like to use? Maximim is 20.</p>
+
+                    <form id="createDevices" style="overflow:hidden">
+                        <div class="form-group">
+                            <div class="input-group">
+                                <div class="input-group-addon">Device 1</div>
+                                <input type="text" class="form-control createDevice" placeholder="Device Name">
+                                <div class="input-group-addon removeDevice">❌</div>
+                            </div>
+                            
+                            <label class="btn btn-default btn-file" style="margin-top:10px">
+                                <span class="deviceImageLabel">Select Picture (Optional) ...</span> <input type="file" class="deviceImage" style="display: none;">
+                            </label>
+                        </div>
+                    </form>
+
+                    <button class="btn btn-primary btn-block" style="margin-top:10px" id="submitDevices">Done!</button>
+                </div>
+            </div>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading" role="tab" id="headingTwo">
+                <h4 class="panel-title">
+                    <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+              What data has to be emitted?
+            </a>
+                </h4>
+            </div>
+            <div id="collapseAddAttributes" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+                <div class="panel-body addAttributes">
+                    <p>Add the attributes every device has to emit.</p>
+
+                </div>
+                <button class="btn btn-primary btn-block" id="submitAttributes" style="margin:10px;width:97%">Done!</button>
+            </div>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading" role="tab" id="headingThree">
+                <h4 class="panel-title">
+                    <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseDataValues">
+              Data Types
+            </a>
+                </h4>
+            </div>
+            <div id="collapseDataValues" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+                <div class="panel-body addDataValues">
+                    <p>Select the type and range/categories for the different attributes.</p>
+
+                </div>
+                <button class="btn btn-primary btn-block" id="submitDataValues" style="margin:10px;width:97%">Done!</button>
+            </div>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading" role="tab" id="headingThree">
+                <h4 class="panel-title">
+                    <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseDataValues">
+              (Optional) SDS Project Setup
+            </a>
+                </h4>
+            </div>
+            <div id="collapseSDSSetup" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+                <div class="panel-body sdsSetup">
+                    <p>If applicable, set the parameters to use a SDS project.</p>
+                    
+                    <form id="sdsSetup" style="overflow:hidden">
+                        <div class="form-group">
+                            <div class="input-group">
+                                <div class="input-group-addon">Server Name</div>
+                                <input type="text" class="form-control sdsServerName" placeholder="IP (or name) adress streaming server">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="input-group">
+                                <div class="input-group-addon">Project Name</div>
+                                <input type="text" class="form-control sdsProjectName" placeholder="Project Name">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="input-group">
+                                <div class="input-group-addon">Input Stream Name</div>
+                                <input type="text" class="form-control sdsInputStreamName" placeholder="Input Stream Name">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="input-group">
+                                <div class="input-group-addon">User Name</div>
+                                <input type="text" class="form-control sdsUsername" placeholder="User Name">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="input-group">
+                                <div class="input-group-addon">Password</div>
+                                <input type="password" class="form-control sdsPassword" placeholder="Password">
+                            </div>
+                        </div>
+                    </form>
+                    
+                <div class="row" style="margin-top:25px">
+                  <div class="col-md-6">
+                      <button class="btn btn-primary btn-block" id="safeSDSSettings">Save Settings!</button>
+                  </div>
+                  <div class="col-md-6">
+                      <button class="btn btn-primary btn-block" id="skipSDS">Skip</button>
+                  </div>
+                </div>
+
+                </div>
+            </div>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading" role="tab" id="headingThree">
+                <h4 class="panel-title">
+                    <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseDataValues">
+              Live Control Panel
+            </a>
+                </h4>
+            </div>
+            <div id="collapseControlPanel" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+                <div class="panel-body controlPanel">
+                    <p>Control the values that are being streamed.</p>
+                    
+                <div id="photoBanner">
+                    <div id="photos" style="display:flex;justify-content:center">
+                        
+                    </div>
+                </div>
+                    
+                <div id="controlNumberValues">
+                    
+                </div>
+                     
+                <div id="controlStringValues">
+                    
+                </div>
+                     
+                <div id="controlBooleanValues">
+                    
+                </div>
+                      
+                <div class="row" style="margin-top:25px">
+                  <div class="col-md-6">
+                      <button class="btn btn-primary btn-block" id="startStream">Start Stream!</button>
+                  </div>
+                  <div class="col-md-6">
+                      <button class="btn btn-primary btn-block" id="viewData">View Data URL</button>
+                  </div>
+                </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
