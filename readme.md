@@ -35,9 +35,9 @@ This package can be used to deploy an IoT device simulator on your local machine
    ```
     $ cd <path/to/folder> // omit the <>
    ```
-5. Clone the project into a folder and move into the folder:
+5. Clone the project into the folder iot-device-simulator and move into the folder on the command Prompt:
     ```
-    $ git clone https://github.com/Temmermans/iot-device-simulator.git <folderName> && cd <folderName>
+    $ git clone https://github.com/Temmermans/iot-device-simulator.git iot-device-simulator && cd iot-device-simulator
     ```
 6. Install all the necessary libs via the following command:
     ```
