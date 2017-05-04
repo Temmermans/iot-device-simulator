@@ -3,7 +3,6 @@ var logger = require('morgan');
 var bodyParser = require('body-parser');
 var exphbs  = require('express-handlebars');
 var helmet = require('helmet');
-var subdomain = require('subdomain');
 var app = express();
 var server = require('http').Server(app);
 
@@ -26,8 +25,7 @@ app.set('view engine', 'handlebars');
 // serve the static content 
 app.use(express.static(__dirname + '/public'));
 
-// mount the routes and subdomains (SUBDOMAIN_BASE own declared var with heroku config:set SUBDOMAIN_BASE=delaware-insights --remote production)
-app.use(subdomain({ base : process.env.SUBDOMAIN_BASE || 'localhost', removeWWW : true }));
+// mount the routes
 require('./app/routes.js')(app); // load our routes and pass in our app
 
 // errorhandling
