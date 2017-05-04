@@ -502,7 +502,7 @@ function nudge(e) {
     });
     
     // play the homer sound
-    var audio = new Audio('audio/doh.mp3');
+    var audio = new Audio('./audio/doh.mp3');
     audio.play();
 
     // set the boolean value to true for 1.5 second
