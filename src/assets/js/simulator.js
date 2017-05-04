@@ -500,6 +500,10 @@ function nudge(e) {
     imageToAnimate.addEventListener('animationend', function(e) {
         imageToAnimate.removeAttribute('class');
     });
+    
+    // play the homer sound
+    var audio = new Audio('audio/doh.mp3');
+    audio.play();
 
     // set the boolean value to true for 1.5 second
     devicesData[device][attribute]["fixedValue"] = "true";
