@@ -55,7 +55,6 @@ If using other sites, makes sure to turn it off again.
 ### ToDo
 
 - Add support for more than SAP SDS
-- add ES6 to build flow
 - Clean up code
 - Form Validation
 - Document Walkthrough
