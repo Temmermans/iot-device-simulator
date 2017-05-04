@@ -47,7 +47,7 @@ This package can be used to deploy an IoT device simulator on your local machine
     ```
     $ npm run dev
     ```
-8. Navigate to the following url on the localhost: [localhost](http://iot.localhost:3000/simulator)
+8. Navigate to the following url on the localhost: [localhost](http://localhost:3000/simulator)
 
 If you an access-Control-Allow-Origin error install following chrome extension: Allow-Control-Allow-Origin and enable it, make sure the icon is green and then try again.
 If using other sites, makes sure to turn it off again.
