@@ -56,7 +56,7 @@ function pictureSelected(e) {
         reader.onload = function (e) {
             devicePictures.push(e.target.result);
         }
-        const image = reader.readAsDataURL(fileInput.files[0]);
+        const image = reader.readAsDataURL(this.files[0]);
     }
 }
 
@@ -117,6 +117,13 @@ function attributeInputFieldClicked(e) {
         "</div>";
     container.innerHTML = input;
     clickedContainer.appendChild(container);
+    
+    container.addEventListener('animationend', function (e) {
+
+            // remove the animation so it does not slide in again when clicking through the accordion
+            container.className = "form-group";
+
+    });
 
     container.firstChild.children[1].addEventListener('click', attributeInputFieldClicked);
     container.firstChild.children[2].addEventListener('click', removeCreatedAttribute);
@@ -134,7 +141,7 @@ function deviceInputFieldClicked() {
             "<div class='form-group animated slideInRight'>" +
             "<div class='input-group'>" +
             "<div class='input-group-addon'>Device " + numberOfCreateDevicesInputFields + "</div>" +
-            "<input type='text' class='form-control createDevice' id='device" + numberOfCreateDevicesInputFields + "' placeholder='Device Name'>" +
+            "<input type='text' class='form-control createDevice' id='device" + numberOfCreateDevicesInputFields + "' placeholder='Device Name (No spaces)'>" +
             "<div class='input-group-addon removeDevice'>❌</div>" +
             "</div>" +
             "<label class='btn btn-default btn-file' style='margin-top:10px'>" +
