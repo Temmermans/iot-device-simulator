@@ -6,6 +6,7 @@ const submitDevicesButton = document.querySelector('#submitDevices');
 const submitAttributesButton = document.querySelector('#submitAttributes');
 const submitDataValuesButton = document.querySelector('#submitDataValues');
 const startStreamButton = document.querySelector('#startStream');
+const stopStreamButton = document.querySelector('#stopStream');
 const submitSdsSettings = document.querySelector('#safeSDSSettings');
 const skipSdsSettings = document.querySelector('#skipSDS');
 const createDeviceInputFields = Array.from(document.querySelectorAll('.createDevice'));
@@ -22,6 +23,7 @@ const numberValues = [];
 const booleanValues = [];
 const stringValues = [];
 const devicePictures = [];
+var streamingInterval = [];
 var isSdsProject = false;
 var sdsSettings = {};
 var numberOfCreateDevicesInputFields = 1;
@@ -786,7 +788,7 @@ function startStreaming() {
 
             console.log(getDataToSend());
 
-            setInterval(function () {
+            const i = setInterval(function () {
                 var settings = {
                     "async": true,
                     "crossDomain": true,
@@ -802,10 +804,19 @@ function startStreaming() {
                     console.log("posted successfully, " + response);
                 });
             }, 1000);
+            
+            streamingInterval.push(i);
         });
     } else {
-        setInterval(sendData, 1000);
+        const i = setInterval(sendData, 1000);
+        streamingInterval.push(i);
     }
+}
+
+function stopStreaming() {
+    clearInterval(streamingInterval[0]);
+    // reset to empty array
+    streamingInterval = [];
 }
 
 function skipSds() {
@@ -871,3 +882,5 @@ skipSdsSettings.addEventListener('click', skipSds);
 submitSdsSettings.addEventListener('click', submitSds);
 
 fileInput.addEventListener('change', pictureSelected);
+
+stopStreamButton.addEventListener('click', stopStreaming);
