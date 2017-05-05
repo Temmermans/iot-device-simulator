@@ -4,7 +4,7 @@
 
 This package can be used to deploy an IoT device simulator on your local machine. Can be used in conjunction with SDS to build demo's and prototypes.
 
-*** Check out this demo video right here: [example no SDS](https://vimeo.com/216167084) ***
+**Check out this demo video right here: [example no SDS](https://vimeo.com/216167084)**
 
 ### Use
 
@@ -67,13 +67,13 @@ The control panel has the option to adjust the values while streaming of the att
 
 #### SDS
 
-** Demo video coming soon **
+**Demo video coming soon**
 
 For SDS projects, provide the necessary details in the SDS panel. With the correct credentials, you should see data coming in in the windows of yout SDS project.
 
 #### Other
 
-** Check out this demo video right here: [example no SDS](https://vimeo.com/216167084) **
+**Check out this demo video right here: [example no SDS](https://vimeo.com/216167084)**
 
 If you skip the SDS project, the app will start streaming data to the following endpoint: [/simulator/data](http://localhost:3000/simulator/data) as JSON. This can then be consumed by a front end tool capable of doing REST requests. Keep in mind that to use this, you will need to install mongodb on your local machine. (see above).
 
