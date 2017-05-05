@@ -55,7 +55,6 @@ If using other sites, makes sure to turn it off again.
 ### ToDo
 
 - Add support for more than SAP SDS
-- Clean up code
 - Form Validation
 - Document Walkthrough
 - If no pictures are selected, give default

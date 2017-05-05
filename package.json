@@ -5,7 +5,9 @@
   "description": "Device Simulator to easily prototype",
   "main": "server.js",
   "babel": {
-    "presets": ["env"]
+    "presets": [
+      "env"
+    ]
   },
   "watch": {
     "watch:js": "src/assets/js/*.js",
@@ -26,7 +28,7 @@
     "test": "mocha test",
     "build:css": "lessc src/assets/less/main.less public/css/app.min.css -x",
     "watch:less": "npm run build:css",
-    "babelify": "babel src/assets/js --out-file src/compiled/script-compiled.js",
+    "babelify": "browserify src/assets/js/*.js -o src/compiled/script-compiled.js -t [ babelify --presets [ env ] ]",
     "build:js": "npm run babelify && uglifyjs src/compiled/*.js -o public/js/app.min.js",
     "watch:js": "npm run build:js",
     "build:img": "imagemin src/assets/img/* --out-dir=public/img",
@@ -39,6 +41,7 @@
   "dependencies": {
     "body-parser": "^1.15.0",
     "bower": "^1.8.0",
+    "elementx": "^3.1.2",
     "express": "^4.13.4",
     "express-handlebars": "^3.0.0",
     "helmet": "^2.1.0",
@@ -49,6 +52,8 @@
   "devDependencies": {
     "babel-cli": "^6.24.1",
     "babel-preset-env": "^1.4.0",
+    "babelify": "^7.3.0",
+    "browserify": "^14.3.0",
     "chai": "^3.5.0",
     "cheerio": "^0.20.0",
     "debug": "^2.2.0",
