@@ -4,6 +4,8 @@
 
 This package can be used to deploy an IoT device simulator on your local machine. Can be used in conjunction with SDS to build demo's and prototypes.
 
+** Check out this demo video right here: [example no SDS](https://vimeo.com/216167084) **
+
 ### Use
 
 1. First of all install nodejs from the following location: [Node.js](https://nodejs.org/en/)
@@ -59,11 +61,19 @@ If using other sites, makes sure to turn it off again.
 
 ![alt text](./readme-images/chrome-extension.png)
 
+#### Nudge button
+
+The control panel has the option to adjust the values while streaming of the attributes you entered. For numeric values you will see a slider. For booleans and categorical values you see a dropdown. This is useful for when you want to demo certain events in your streaming logic. Also, the nudge button provides the possibility to simulate a sudden event. For example a door that opens for a short period of time or a package that gets bumped. 
+
 #### SDS
+
+** Demo video coming soon **
 
 For SDS projects, provide the necessary details in the SDS panel. With the correct credentials, you should see data coming in in the windows of yout SDS project.
 
 #### Other
+
+** Check out this demo video right here: [example no SDS](https://vimeo.com/216167084) **
 
 If you skip the SDS project, the app will start streaming data to the following endpoint: [/simulator/data](http://localhost:3000/simulator/data) as JSON. This can then be consumed by a front end tool capable of doing REST requests. Keep in mind that to use this, you will need to install mongodb on your local machine. (see above).
 

@@ -69,6 +69,15 @@ const {
 // ######           Functions                              ######
 // ##############################################################
 
+function removeElements(selector) {
+    const elements = $(selector);
+    
+        console.log('removing elements');
+        elements.each(function(index, element) {
+           element.remove();
+        }); 
+}
+
 // ---- functions needed in the create devices panel ---- //
 function removeCreatedDevice(e) {
     const elementToBeRemoved = e.path[3];
@@ -181,6 +190,7 @@ function generateInitialAttributeForm() {
 
 function submitDevices() {
     devicesData = {};
+    removeElements('.addAttributes div[data-device]');
 
     // store the different devices as keys in the devicesData object    
     Array.from(document.querySelectorAll('.createDevice')).forEach(function (inputField, index) {
@@ -425,12 +435,17 @@ function generateDataValuesForm() {
 }
 
 function submitAttributes() {
+    
+    removeElements('.addDataValues div[data-device]');
 
     const devices = Array.from(document.querySelectorAll('[data-device]'));
 
     devices.forEach(function (device) {
         const attributes = Array.from(device.querySelectorAll('.createAttribute'));
         const name = device.dataset.device;
+        
+        // first clear the specific object again
+        devicesData[name] = {};
 
         // loop through attributes and write them to the correct place in the object
         attributes.forEach(function (attribute) {
@@ -510,6 +525,7 @@ function submitDataValues() {
                 }
 
                 if (dropdownValue === "Boolean") {
+                    
                     // write the possible values to the devicesData
                     currentAttribute["categories"] = [true, false];
 
