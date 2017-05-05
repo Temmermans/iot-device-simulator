@@ -4,7 +4,7 @@
 
 This package can be used to deploy an IoT device simulator on your local machine. Can be used in conjunction with SDS to build demo's and prototypes.
 
-** Check out this demo video right here: [example no SDS](https://vimeo.com/216167084) **
+*** Check out this demo video right here: [example no SDS](https://vimeo.com/216167084) ***
 
 ### Use
 
