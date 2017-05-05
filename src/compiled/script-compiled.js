@@ -466,13 +466,36 @@ function removeCreatedDevice(e) {
 function deviceInputFieldClicked() {
 
     if (document.querySelectorAll('.createDevice').length <= 20) {
-
         numberOfCreateDevicesInputFields++;
-
         var deviceId = 'device' + numberOfCreateDevicesInputFields;
 
         // build the new input field
-        var container = div(div({ class: 'form-group animated slideInRight' }, div({ class: 'input-group' }, div({ class: 'input-group-addon' }, 'Device ' + numberOfCreateDevicesInputFields), input({ onClick: deviceInputFieldClicked, type: 'text', class: 'form-control createDevice', id: deviceId, placeholder: 'Device name (No Spaces)' }), div({ onClick: removeCreatedDevice, class: 'input-group-addon removeDevice' }, '❌')), label({ class: 'btn btn-default btn-file', style: 'margin-top:10px' }, span({ class: 'deviceImageLabel' }, 'Select Picture'), input({ onChange: pictureSelected, type: 'file', class: 'deviceImage', style: 'display:none' }))));
+        var container = div(div({
+            class: 'form-group animated slideInRight'
+        }, div({
+            class: 'input-group'
+        }, div({
+            class: 'input-group-addon'
+        }, 'Device ' + numberOfCreateDevicesInputFields), input({
+            onClick: deviceInputFieldClicked,
+            type: 'text',
+            class: 'form-control createDevice',
+            id: deviceId,
+            placeholder: 'Device name (No Spaces)'
+        }), div({
+            onClick: removeCreatedDevice,
+            class: 'input-group-addon removeDevice'
+        }, '❌')), label({
+            class: 'btn btn-default btn-file',
+            style: 'margin-top:10px'
+        }, span({
+            class: 'deviceImageLabel'
+        }, 'Select Picture'), input({
+            onChange: pictureSelected,
+            type: 'file',
+            class: 'deviceImage',
+            style: 'display:none'
+        }))));
 
         createDeviceForm.appendChild(container);
 
@@ -495,7 +518,23 @@ function generateInitialAttributeForm() {
         var attributeId = device + '/attribute' + numberOfAttributesCreated[device];
 
         // create the a form for each device entered
-        var node = div({ 'data-device': device }, h2({}, device), div({ class: 'form-group' }, div({ class: 'input-group' }, div({ class: 'input-group-addon' }, 'Attribute ' + numberOfAttributesCreated[device]), input({ onClick: attributeInputFieldClicked, type: 'text', class: 'form-control createAttribute', id: attributeId, placeholder: 'Attribute Name (No spaces)' }), div({ class: 'input-group-addon removeAttribute' }, '❌'))));
+        var node = div({
+            'data-device': device
+        }, h2({}, device), div({
+            class: 'form-group'
+        }, div({
+            class: 'input-group'
+        }, div({
+            class: 'input-group-addon'
+        }, 'Attribute ' + numberOfAttributesCreated[device]), input({
+            onClick: attributeInputFieldClicked,
+            type: 'text',
+            class: 'form-control createAttribute',
+            id: attributeId,
+            placeholder: 'Attribute Name (No spaces)'
+        }), div({
+            class: 'input-group-addon removeAttribute'
+        }, '❌'))));
 
         // add to the addAttributes panel
         document.querySelector('.addAttributes').appendChild(node);
@@ -546,7 +585,9 @@ function generateImagesInControlPanel() {
     // Now we have two arrays of the same length (pictures and devices)
     devices.forEach(function (device, index) {
         // create image for every device
-        var image = img({ src: devicePictures[index], id: device,
+        var image = img({
+            src: devicePictures[index],
+            id: device,
             style: "width:150px;height:150px;border-radius:50%;border:2px solid #F2F2F2;margin-left:5px"
         });
 
@@ -596,7 +637,22 @@ function attributeInputFieldClicked(e) {
 
     var attributeId = device + '/attribute' + numberOfAttributesCreated[device];
 
-    var container = div({ class: 'form-group animated slideInRight' }, div({ class: 'input-group' }, div({ class: 'input-group-addon' }, "Attribute " + numberOfAttributesCreated[device]), input({ onClick: attributeInputFieldClicked, type: 'text', class: 'form-control createAttribute', id: attributeId, placeholder: 'Attribute Name (No spaces)' }), div({ onClick: removeCreatedAttribute, class: 'input-group-addon removeAttribute' }, '❌')));
+    var container = div({
+        class: 'form-group animated slideInRight'
+    }, div({
+        class: 'input-group'
+    }, div({
+        class: 'input-group-addon'
+    }, "Attribute " + numberOfAttributesCreated[device]), input({
+        onClick: attributeInputFieldClicked,
+        type: 'text',
+        class: 'form-control createAttribute',
+        id: attributeId,
+        placeholder: 'Attribute Name (No spaces)'
+    }), div({
+        onClick: removeCreatedAttribute,
+        class: 'input-group-addon removeAttribute'
+    }, '❌')));
 
     clickedContainer.appendChild(container);
 
@@ -634,26 +690,56 @@ function generateDataValuesForm() {
 
     devices.forEach(function (device) {
         // create the container
-        var container = div({ 'data-device': device }, h2({}, device));
+        var container = div({
+            'data-device': device
+        }, h2({}, device));
 
         // create a form for every attribute for every device so the user can enter data type values
         var attributes = Object.keys(devicesData[device]);
         attributes.forEach(function (attribute) {
 
             // drodown to select what the data type is of the attribute
-            var dataTypesDropDown = select({ onChange: dataTypeSelected, class: 'form-control', 'data-attribute': attribute }, option({}, "String"), option({}, "Number"), option({}, "Boolean"), option({}, "GPS-String"));
+            var dataTypesDropDown = select({
+                onChange: dataTypeSelected,
+                class: 'form-control',
+                'data-attribute': attribute
+            }, option({}, "String"), option({}, "Number"), option({}, "Boolean"), option({}, "GPS-String"));
 
             // input field to enter categorical values
-            var categoryInput = input({ 'data-attribute': attribute, style: 'width:100%;margin-top:10px;', type: 'text',
+            var categoryInput = input({
+                'data-attribute': attribute,
+                style: 'width:100%;margin-top:10px;',
+                type: 'text',
                 class: 'form-control',
                 id: 'categories',
                 placeholder: 'Enter categories (comma seperated)'
             });
 
             // input field to enter numerical values
-            var rangeInput = div({ style: 'display:none', 'data-attribute': attribute }, p({}, 'From'), input({ style: 'width:100%', 'data-attribute': attribute, type: 'number', class: 'form-control', id: 'range-from', placeholder: 'From' }), p({}, 'To'), input({ style: 'width:100%', 'data-attribute': attribute, type: 'number', class: 'form-control', id: 'range-to', placeholder: 'To' }));
+            var rangeInput = div({
+                style: 'display:none',
+                'data-attribute': attribute
+            }, p({}, 'From'), input({
+                style: 'width:100%',
+                'data-attribute': attribute,
+                type: 'number',
+                class: 'form-control',
+                id: 'range-from',
+                placeholder: 'From'
+            }), p({}, 'To'), input({
+                style: 'width:100%',
+                'data-attribute': attribute,
+                type: 'number',
+                class: 'form-control',
+                id: 'range-to',
+                placeholder: 'To'
+            }));
 
-            var dataValueForm = form({ class: 'form-inline' }, p({ class: 'attribute' }, attribute), dataTypesDropDown, categoryInput, rangeInput);
+            var dataValueForm = form({
+                class: 'form-inline'
+            }, p({
+                class: 'attribute'
+            }, attribute), dataTypesDropDown, categoryInput, rangeInput);
 
             container.appendChild(dataValueForm);
         });
@@ -815,7 +901,11 @@ function generateControlPanel() {
     // for every value in the numbersValues array, create a slider
     amountOfNumberValues.forEach(function (value) {
 
-        var slider = input({ style: 'width:100%', id: value.attributeName + "-" + value.deviceName, type: 'text', value: '',
+        var slider = input({
+            style: 'width:100%',
+            id: value.attributeName + "-" + value.deviceName,
+            type: 'text',
+            value: '',
             'data-slider-min': parseInt(value.min) - 5,
             'data-slider-max': parseInt(value.max) + 5,
             'data-slider-step': 1,
@@ -824,7 +914,12 @@ function generateControlPanel() {
             'data-device': value.deviceName
         });
 
-        var container = div({ onClick: sliderValueChanged, class: 'sliderContainer', 'data-attribute': value.attributeName, 'data-device': value.deviceName }, p({}, "Adjust range for " + value.attributeName + " (" + value.deviceName + "):"), slider);
+        var container = div({
+            onClick: sliderValueChanged,
+            class: 'sliderContainer',
+            'data-attribute': value.attributeName,
+            'data-device': value.deviceName
+        }, p({}, "Adjust range for " + value.attributeName + " (" + value.deviceName + "):"), slider);
 
         // append the container to the body
         controlsForNumberValues.appendChild(container);
@@ -836,7 +931,33 @@ function generateControlPanel() {
     // for every boolean value, create a dropdown
     amountOfBooleanValues.forEach(function (value) {
 
-        var container = div({ onChange: controlPanelDropDownSelected, class: 'booleanDropdownContainer row', 'data-attribute': value.attributeName, 'data-device': value.deviceName }, p({ style: 'padding-left:15px' }, "Fix value for " + value.attributeName + " (" + value.deviceName + "):"), div({ class: 'col-md-9' }, select({ class: 'form-control', 'data-attribute': value.attributeName, 'data-device': value.deviceName }, option({ value: '--' }, '--'), option({ value: 'true' }, 'true'), option({ value: 'false' }, 'false'))), div({ class: 'col-md-3' }, button({ onClick: nudge, class: 'btn btn-danger btn-block nudge', 'data-attribute': value.attributeName, 'data-device': value.deviceName }, 'Nudge!')));
+        var container = div({
+            onChange: controlPanelDropDownSelected,
+            class: 'booleanDropdownContainer row',
+            'data-attribute': value.attributeName,
+            'data-device': value.deviceName
+        }, p({
+            style: 'padding-left:15px'
+        }, "Fix value for " + value.attributeName + " (" + value.deviceName + "):"), div({
+            class: 'col-md-9'
+        }, select({
+            class: 'form-control',
+            'data-attribute': value.attributeName,
+            'data-device': value.deviceName
+        }, option({
+            value: '--'
+        }, '--'), option({
+            value: 'true'
+        }, 'true'), option({
+            value: 'false'
+        }, 'false'))), div({
+            class: 'col-md-3'
+        }, button({
+            onClick: nudge,
+            class: 'btn btn-danger btn-block nudge',
+            'data-attribute': value.attributeName,
+            'data-device': value.deviceName
+        }, 'Nudge!')));
 
         // append the dropdown to the container
         controlsForBooleanValues.appendChild(container);
@@ -845,9 +966,20 @@ function generateControlPanel() {
     // for every string value, create a dropdown
     amountOfStringValues.forEach(function (value) {
 
-        var dropdown = select({ class: 'form-control', 'data-attribute': value.attributeName, 'data-device': value.deviceName }, option({ value: '--' }, '--'));
+        var dropdown = select({
+            class: 'form-control',
+            'data-attribute': value.attributeName,
+            'data-device': value.deviceName
+        }, option({
+            value: '--'
+        }, '--'));
 
-        var container = div({ onChange: controlPanelDropDownSelected, class: 'stringDropdownContainer', 'data-attribute': value.attributeName, 'data-device': value.deviceName }, p({}, "Fix value for " + value.attributeName + " (" + value.deviceName + "):"), dropdown);
+        var container = div({
+            onChange: controlPanelDropDownSelected,
+            class: 'stringDropdownContainer',
+            'data-attribute': value.attributeName,
+            'data-device': value.deviceName
+        }, p({}, "Fix value for " + value.attributeName + " (" + value.deviceName + "):"), dropdown);
 
         // append the dropdown to the container
         controlsForBooleanValues.appendChild(container);
@@ -856,7 +988,9 @@ function generateControlPanel() {
         var categories = value.categories;
 
         categories.forEach(function (category) {
-            var opt = option({ value: category }, category);
+            var opt = option({
+                value: category
+            }, category);
             dropdown.appendChild(opt);
         });
     });
@@ -962,10 +1096,29 @@ function startStreaming() {
     }
 }
 
+function flushDb() {
+    var settings = {
+        "async": true,
+        "url": '/simulator/data/delete',
+        "method": "GET",
+        "headers": {
+            "cache-control": "no-cache"
+        }
+    };
+
+    $.ajax(settings).done(function (response) {
+        console.log("Success: " + response);
+    });
+}
+
 function stopStreaming() {
     clearInterval(streamingInterval[0]);
     // reset to empty array
     streamingInterval = [];
+
+    if (!isSdsProject) {
+        flushDb();
+    }
 }
 
 function controlPanelDropDownSelected(e) {
@@ -1021,7 +1174,21 @@ function getDataToSend() {
 
 function sendData() {
 
-    console.log(getDataToSend());
+    var settings = {
+        "async": true,
+        "crossDomain": true,
+        "url": "http://localhost:3000/simulator/data",
+        "method": "POST",
+        "headers": {
+            "content-type": "application/json",
+            "cache-control": "no-cache"
+        },
+        "processData": false,
+        "data": JSON.stringify(getDataToSend())
+    };
+    $.ajax(settings).done(function (response) {
+        console.log("posted successfully, " + response);
+    });
 }
 
 // ##############################################################

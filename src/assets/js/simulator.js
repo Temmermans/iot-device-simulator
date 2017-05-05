@@ -79,9 +79,7 @@ function removeCreatedDevice(e) {
 function deviceInputFieldClicked() {
 
     if (document.querySelectorAll('.createDevice').length <= 20) {
-
         numberOfCreateDevicesInputFields++;
-
         const deviceId = `device${numberOfCreateDevicesInputFields}`;
 
         // build the new input field
@@ -814,10 +812,29 @@ function startStreaming() {
     }
 }
 
+function flushDb() {
+    let settings = {
+        "async": true,
+        "url": '/simulator/data/delete',
+        "method": "GET",
+        "headers": {
+            "cache-control": "no-cache"
+        }
+    };
+
+    $.ajax(settings).done(function (response) {
+        console.log("Success: " + response);
+    });     
+}
+
 function stopStreaming() {
     clearInterval(streamingInterval[0]);
     // reset to empty array
     streamingInterval = [];
+    
+    if (!isSdsProject) {
+        flushDb();
+    }
 }
 
 function controlPanelDropDownSelected(e) {
@@ -874,7 +891,21 @@ function getDataToSend() {
 
 function sendData() {
 
-    console.log(getDataToSend());
+    var settings = {
+      "async": true,
+      "crossDomain": true,
+      "url": "http://localhost:3000/simulator/data",
+      "method": "POST",
+      "headers": {
+        "content-type": "application/json",
+        "cache-control": "no-cache"
+      },
+      "processData": false,
+      "data": JSON.stringify(getDataToSend())
+    }
+    $.ajax(settings).done(function (response) {
+        console.log("posted successfully, " + response);
+    });
 
 }
 

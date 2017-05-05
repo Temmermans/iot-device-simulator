@@ -2,7 +2,7 @@
   "name": "iot-device-simulator",
   "version": "1.0.0",
   "private": true,
-  "description": "Device Simulator to easily prototype",
+  "description": "Device Simulator to easily build demo's and prototypes using streaming data",
   "main": "server.js",
   "babel": {
     "presets": [
@@ -45,6 +45,8 @@
     "express": "^4.13.4",
     "express-handlebars": "^3.0.0",
     "helmet": "^2.1.0",
+    "mongodb": "^2.2.26",
+    "mongoose": "^4.9.7",
     "morgan": "^1.7.0",
     "ms": "^0.7.1",
     "subdomain": "^1.2.0"
