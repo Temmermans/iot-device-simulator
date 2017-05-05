@@ -65,14 +65,17 @@ For SDS projects, provide the necessary details in the SDS panel. With the corre
 
 #### Other
 
-If you skip the SDS project, the app will start streaming data to the following endpoint: '/simulator/data' as JSON. This can then be consumed by a front end tool capable of doing REST requests. Keep in mind that to use this, you will need to install mongodb on your local machine. (see above).
+If you skip the SDS project, the app will start streaming data to the following endpoint: [/simulator/data](http://localhost:3000/simulator/data) as JSON. This can then be consumed by a front end tool capable of doing REST requests. Keep in mind that to use this, you will need to install mongodb on your local machine. (see above).
 
 Every time you press the stop streaming button, the db will be flushed, to avoid taking up to much space when streaming regularly.
 
 ### ToDo
 
-- Add support for more than SAP SDS
 - Form Validation
 - Document Walkthrough
 - If no pictures are selected, give default
 - ...
+
+### Contributions
+
+Contributions and ideas are more than welcome!
