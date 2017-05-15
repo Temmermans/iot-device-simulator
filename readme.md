@@ -1,3 +1,7 @@
+![Logo delaware](./readme-images/Logo_delaware_FullColor_digital.png)
+
+____
+
 # Iot Device Simulator
 
 ### Info
@@ -53,13 +57,22 @@ This package can be used to deploy an IoT device simulator on your local machine
     ```
     $ npm run dev
     ```
-9. Navigate to the following url on the localhost: [localhost](http://localhost:3000/simulator)
+9. a) For Mac, start the mongodb service with following command in another command prompt:
+    ```
+    $ mongod
+    ```
+    
+    b) For windows, go to your root c:/ and add a folder called 'data' and in that folder a folder called 'db' (mongodb does not create those automatically). Start the mongodb service by navigating to the bin folder of your mongodb installation in a command prompt and typing (or add the bin folder to your env variables):
+    ```
+    $ mongod
+    ```
+10. Navigate to the following url on the localhost: [localhost](http://localhost:3000/simulator)
 
 
 If you an access-Control-Allow-Origin error install following chrome extension: Allow-Control-Allow-Origin and enable it, make sure the icon is green and then try again.
 If using other sites, makes sure to turn it off again.
 
-![alt text](./readme-images/chrome-extension.png)
+![Chrome extension](./readme-images/chrome-extension.png)
 
 #### Nudge button
 
@@ -82,8 +95,9 @@ Every time you press the stop streaming button, the db will be flushed, to avoid
 ### ToDo
 
 - Form Validation
-- Document Walkthrough
-- If no pictures are selected, give default
+- Styling
+- Use electron to create a native desktop app
+- Use iterator and generators for the stream?
 - ...
 
 ### Contributions

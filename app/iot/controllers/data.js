@@ -1,10 +1,8 @@
 var Data = require('../models/data');
 
 exports.all = function(req, res) {
-  // route handlers go here
   Data.find({}, function(err, docs) {
     if(err) throw err;
-
     res.json(docs);
   });  
 }
@@ -36,8 +34,7 @@ exports.write = function(req, res, next) {
 exports.delete = function(req, res, next) {
     
   Data.find({}).remove(function(err) {
-      if (err) throw err;
-      
+      if (err) throw err; 
       res.end('data deleted')
   });
     

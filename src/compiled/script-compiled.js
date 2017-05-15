@@ -455,9 +455,8 @@ var _require = require('elementx'),
 // ##############################################################
 
 function removeElements(selector) {
-    var elements = $(selector);
 
-    console.log('removing elements');
+    var elements = $(selector);
     elements.each(function (index, element) {
         element.remove();
     });
@@ -465,6 +464,7 @@ function removeElements(selector) {
 
 // ---- functions needed in the create devices panel ---- //
 function removeCreatedDevice(e) {
+
     var elementToBeRemoved = e.path[3];
     createDeviceForm.removeChild(elementToBeRemoved);
     numberOfCreateDevicesInputFields--;
@@ -477,27 +477,13 @@ function deviceInputFieldClicked() {
         var deviceId = 'device' + numberOfCreateDevicesInputFields;
 
         // build the new input field
-        var container = div(div({
-            class: 'form-group animated slideInRight'
-        }, div({
-            class: 'input-group'
-        }, div({
-            class: 'input-group-addon'
-        }, 'Device ' + numberOfCreateDevicesInputFields), input({
+        var container = div(div({ class: 'form-group animated slideInRight' }, div({ class: 'input-group' }, div({ class: 'input-group-addon' }, 'Device ' + numberOfCreateDevicesInputFields), input({
             onClick: deviceInputFieldClicked,
             type: 'text',
             class: 'form-control createDevice',
             id: deviceId,
             placeholder: 'Device name (No Spaces)'
-        }), div({
-            onClick: removeCreatedDevice,
-            class: 'input-group-addon removeDevice'
-        }, '❌')), label({
-            class: 'btn btn-default btn-file',
-            style: 'margin-top:10px'
-        }, span({
-            class: 'deviceImageLabel'
-        }, 'Select Picture'), input({
+        }), div({ onClick: removeCreatedDevice, class: 'input-group-addon removeDevice' }, '❌')), label({ class: 'btn btn-default btn-file', style: 'margin-top:10px' }, span({ class: 'deviceImageLabel' }, 'Select Picture'), input({
             onChange: pictureSelected,
             type: 'file',
             class: 'deviceImage',
@@ -518,30 +504,18 @@ function generateInitialAttributeForm() {
     var devices = Object.keys(devicesData);
 
     devices.forEach(function (device, index) {
-
         // set a counter in our array so we can keep track of the different attributes
         numberOfAttributesCreated[device] = 1;
-
         var attributeId = device + '/attribute' + numberOfAttributesCreated[device];
 
         // create the a form for each device entered
-        var node = div({
-            'data-device': device
-        }, h2({}, device), div({
-            class: 'form-group'
-        }, div({
-            class: 'input-group'
-        }, div({
-            class: 'input-group-addon'
-        }, 'Attribute ' + numberOfAttributesCreated[device]), input({
+        var node = div({ 'data-device': device }, h2({}, device), div({ class: 'form-group' }, div({ class: 'input-group' }, div({ class: 'input-group-addon' }, 'Attribute ' + numberOfAttributesCreated[device]), input({
             onClick: attributeInputFieldClicked,
             type: 'text',
             class: 'form-control createAttribute',
             id: attributeId,
             placeholder: 'Attribute Name (No spaces)'
-        }), div({
-            class: 'input-group-addon removeAttribute'
-        }, '❌'))));
+        }), div({ class: 'input-group-addon removeAttribute' }, '❌'))));
 
         // add to the addAttributes panel
         document.querySelector('.addAttributes').appendChild(node);
@@ -549,6 +523,7 @@ function generateInitialAttributeForm() {
 }
 
 function submitDevices() {
+
     devicesData = {};
     removeElements('.addAttributes div[data-device]');
 
@@ -561,25 +536,12 @@ function submitDevices() {
 
     // if object is empty
     if (Object.keys(devicesData).length === 0 && devicesData.constructor === Object) {
-        $.notify({
-            // options
-            message: 'Please fill in at least 1 device.'
-        }, {
-            // settings
-            type: 'danger'
-        });
+        $.notify({ message: 'Please fill in at least 1 device.' }, { type: 'danger' });
     } else {
         generateInitialAttributeForm();
-
-        $.notify({
-            // options
-            message: 'Devices saved succesfully!'
-        }, {
-            // settings
-            type: 'success'
-        });
-
         generateImagesInControlPanel();
+
+        $.notify({ message: 'Devices saved succesfully!' }, { type: 'success' });
 
         $('#collapseCreateDevices').collapse('hide');
         $('#collapseAddAttributes').collapse('show');
@@ -594,7 +556,7 @@ function generateImagesInControlPanel() {
     devices.forEach(function (device, index) {
         // create image for every device
         var image = img({
-            src: devicePictures[index],
+            src: devicePictures[index] || '/img/placeholder.png',
             id: device,
             style: "width:150px;height:150px;border-radius:50%;border:2px solid #F2F2F2;margin-left:5px"
         });
@@ -612,7 +574,7 @@ function pictureSelected(e) {
 
     if (this.files) fileName = e.target.value.split('\\').pop();
 
-    if (fileName) e.target.previousElementSibling.innerHTML = fileName;else e.target.previousElementSibling.innerHTML = "Select Picture (Optional) ...";
+    if (fileName) e.target.previousElementSibling.innerHTML = fileName;else e.target.previousElementSibling.innerHTML = "Select Picture ...";
 
     // read image url and push it to pictures array
     if (fileInput.files && fileInput.files[0]) {
@@ -628,9 +590,10 @@ function pictureSelected(e) {
 // ---- functions needed in the create attributes panel ---- //
 
 function removeCreatedAttribute(e) {
+
     var elementToBeRemoved = e.path[2];
     var parentElement = e.path[3];
-    var device = e.path[3].dataset.device;
+    var device = parentElement.dataset.device;
     parentElement.removeChild(elementToBeRemoved);
     numberOfAttributesCreated[device]--;
 }
@@ -645,22 +608,13 @@ function attributeInputFieldClicked(e) {
 
     var attributeId = device + '/attribute' + numberOfAttributesCreated[device];
 
-    var container = div({
-        class: 'form-group animated slideInRight'
-    }, div({
-        class: 'input-group'
-    }, div({
-        class: 'input-group-addon'
-    }, "Attribute " + numberOfAttributesCreated[device]), input({
+    var container = div({ class: 'form-group animated slideInRight' }, div({ class: 'input-group' }, div({ class: 'input-group-addon' }, "Attribute " + numberOfAttributesCreated[device]), input({
         onClick: attributeInputFieldClicked,
         type: 'text',
         class: 'form-control createAttribute',
         id: attributeId,
         placeholder: 'Attribute Name (No spaces)'
-    }), div({
-        onClick: removeCreatedAttribute,
-        class: 'input-group-addon removeAttribute'
-    }, '❌')));
+    }), div({ onClick: removeCreatedAttribute, class: 'input-group-addon removeAttribute' }, '❌')));
 
     clickedContainer.appendChild(container);
 
@@ -671,6 +625,7 @@ function attributeInputFieldClicked(e) {
 }
 
 function dataTypeSelected() {
+
     var attribute = this.dataset.attribute;
     var selectedValue = this.value;
     var categoryInput = document.querySelector('input[data-attribute=' + attribute + ']');
@@ -698,9 +653,7 @@ function generateDataValuesForm() {
 
     devices.forEach(function (device) {
         // create the container
-        var container = div({
-            'data-device': device
-        }, h2({}, device));
+        var container = div({ 'data-device': device }, h2({}, device));
 
         // create a form for every attribute for every device so the user can enter data type values
         var attributes = Object.keys(devicesData[device]);
@@ -724,10 +677,7 @@ function generateDataValuesForm() {
             });
 
             // input field to enter numerical values
-            var rangeInput = div({
-                style: 'display:none',
-                'data-attribute': attribute
-            }, p({}, 'From'), input({
+            var rangeInput = div({ style: 'display:none', 'data-attribute': attribute }, p({}, 'From'), input({
                 style: 'width:100%',
                 'data-attribute': attribute,
                 type: 'number',
@@ -743,11 +693,7 @@ function generateDataValuesForm() {
                 placeholder: 'To'
             }));
 
-            var dataValueForm = form({
-                class: 'form-inline'
-            }, p({
-                class: 'attribute'
-            }, attribute), dataTypesDropDown, categoryInput, rangeInput);
+            var dataValueForm = form({ class: 'form-inline' }, p({ class: 'attribute' }, attribute), dataTypesDropDown, categoryInput, rangeInput);
 
             container.appendChild(dataValueForm);
         });
@@ -779,13 +725,7 @@ function submitAttributes() {
 
     generateDataValuesForm();
 
-    $.notify({
-        // options
-        message: 'Attributes saved succesfully!'
-    }, {
-        // settings
-        type: 'success'
-    });
+    $.notify({ message: 'Attributes saved succesfully!' }, { type: 'success' });
 
     $('#collapseAddAttributes').collapse('hide');
     $('#collapseDataValues').collapse('show');
@@ -804,7 +744,6 @@ function submitDataValues() {
 
         // loop through different attributes and write the selections to our main object, devicesData
         attributes.forEach(function (attribute) {
-
             var attributeName = attribute.innerHTML;
             var dataTypesDropdown = Array.from(device.querySelectorAll('select[data-attribute=' + attributeName + ']'));
             var currentAttribute = devicesData[deviceName][attributeName];
@@ -858,13 +797,7 @@ function submitDataValues() {
 
     generateControlPanel();
 
-    $.notify({
-        // options
-        message: 'Data Values saved succesfully!'
-    }, {
-        // settings
-        type: 'success'
-    });
+    $.notify({ message: 'Data Values saved succesfully!' }, { type: 'success' });
 
     $('#collapseDataValues').collapse('hide');
     $('#collapseSDSSetup').collapse('show');
@@ -874,13 +807,7 @@ function submitDataValues() {
 
 function skipSds() {
 
-    $.notify({
-        // options
-        message: 'No SDS project!'
-    }, {
-        // settings
-        type: 'success'
-    });
+    $.notify({ message: 'No SDS project!' }, { type: 'success' });
 
     $('#collapseControlPanel').collapse('show');
     $('#collapseSDSSetup').collapse('hide');
@@ -899,13 +826,7 @@ function submitSds() {
     // store the input stream name
     sdsSettings.inputStreamName = document.querySelector('.sdsInputStreamName').value;
 
-    $.notify({
-        // options
-        message: 'SDS settings saved!'
-    }, {
-        // settings
-        type: 'success'
-    });
+    $.notify({ message: 'SDS settings saved!' }, { type: 'success' });
 
     $('#collapseControlPanel').collapse('show');
     $('#collapseSDSSetup').collapse('hide');
@@ -950,23 +871,11 @@ function generateControlPanel() {
             class: 'booleanDropdownContainer row',
             'data-attribute': value.attributeName,
             'data-device': value.deviceName
-        }, p({
-            style: 'padding-left:15px'
-        }, "Fix value for " + value.attributeName + " (" + value.deviceName + "):"), div({
-            class: 'col-md-9'
-        }, select({
+        }, p({ style: 'padding-left:15px' }, "Fix value for " + value.attributeName + " (" + value.deviceName + "):"), div({ class: 'col-md-9' }, select({
             class: 'form-control',
             'data-attribute': value.attributeName,
             'data-device': value.deviceName
-        }, option({
-            value: '--'
-        }, '--'), option({
-            value: 'true'
-        }, 'true'), option({
-            value: 'false'
-        }, 'false'))), div({
-            class: 'col-md-3'
-        }, button({
+        }, option({ value: '--' }, '--'), option({ value: 'true' }, 'true'), option({ value: 'false' }, 'false'))), div({ class: 'col-md-3' }, button({
             onClick: nudge,
             class: 'btn btn-danger btn-block nudge',
             'data-attribute': value.attributeName,
@@ -984,9 +893,7 @@ function generateControlPanel() {
             class: 'form-control',
             'data-attribute': value.attributeName,
             'data-device': value.deviceName
-        }, option({
-            value: '--'
-        }, '--'));
+        }, option({ value: '--' }, '--'));
 
         var container = div({
             onChange: controlPanelDropDownSelected,
@@ -1002,9 +909,7 @@ function generateControlPanel() {
         var categories = value.categories;
 
         categories.forEach(function (category) {
-            var opt = option({
-                value: category
-            }, category);
+            var opt = option({ value: category }, category);
             dropdown.appendChild(opt);
         });
     });
@@ -1013,6 +918,7 @@ function generateControlPanel() {
 // ---- functions needed for the control panel ---- //
 
 function sliderValueChanged(e) {
+
     var attribute = this.dataset.attribute;
     var device = this.dataset.device;
     var inputField = document.querySelector('input[data-attribute=' + attribute + '][data-device=' + device + ']');
@@ -1025,6 +931,7 @@ function sliderValueChanged(e) {
 }
 
 function nudge(e) {
+
     var device = this.dataset.device;
     var attribute = this.dataset.attribute;
     var select = document.querySelector('select[data-device=' + device + '][data-attribute=' + attribute + ']');
@@ -1055,6 +962,9 @@ function nudge(e) {
 function startStreaming() {
 
     if (isSdsProject) {
+
+        var stream = stream();
+
         var url = "http://" + sdsSettings.serverName + ":9093/1/authorization";
         var credentials = [{
             "privilege": "write",
@@ -1083,8 +993,6 @@ function startStreaming() {
             // slice the first chars and the last so we only keep the pure token
             var token = JSON.stringify(response).slice(18, -5) + '"';
 
-            console.log(getDataToSend());
-
             var i = setInterval(function () {
                 var settings = {
                     "async": true,
@@ -1111,6 +1019,7 @@ function startStreaming() {
 }
 
 function flushDb() {
+
     var settings = {
         "async": true,
         "url": '/simulator/data/delete',
@@ -1126,6 +1035,7 @@ function flushDb() {
 }
 
 function stopStreaming() {
+
     clearInterval(streamingInterval[0]);
     // reset to empty array
     streamingInterval = [];
@@ -1178,7 +1088,7 @@ function getDataToSend() {
             // put a timestamp in the data object
             currentAttribute["timestamp"] = new Date().toISOString();
 
-            // put that in the array
+            // put that in the array (because that is the format that SDS expects: array of objects)
             dataToBeSend.push(currentAttribute);
         });
     });

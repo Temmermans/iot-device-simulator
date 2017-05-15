@@ -70,9 +70,8 @@ const {
 // ##############################################################
 
 function removeElements(selector) {
-    const elements = $(selector);
     
-        console.log('removing elements');
+    const elements = $(selector);
         elements.each(function(index, element) {
            element.remove();
         }); 
@@ -80,9 +79,11 @@ function removeElements(selector) {
 
 // ---- functions needed in the create devices panel ---- //
 function removeCreatedDevice(e) {
+    
     const elementToBeRemoved = e.path[3];
     createDeviceForm.removeChild(elementToBeRemoved);
     numberOfCreateDevicesInputFields--;
+    
 }
 
 function deviceInputFieldClicked() {
@@ -94,15 +95,9 @@ function deviceInputFieldClicked() {
         // build the new input field
         const container =
             div(
-                div({
-                        class: 'form-group animated slideInRight'
-                    },
-                    div({
-                            class: 'input-group'
-                        },
-                        div({
-                            class: 'input-group-addon'
-                        }, 'Device ' + numberOfCreateDevicesInputFields),
+                div({ class: 'form-group animated slideInRight'},
+                    div({ class: 'input-group' },
+                        div({ class: 'input-group-addon' }, 'Device ' + numberOfCreateDevicesInputFields),
                         input({
                             onClick: deviceInputFieldClicked,
                             type: 'text',
@@ -110,18 +105,10 @@ function deviceInputFieldClicked() {
                             id: deviceId,
                             placeholder: 'Device name (No Spaces)'
                         }),
-                        div({
-                            onClick: removeCreatedDevice,
-                            class: 'input-group-addon removeDevice'
-                        }, '❌')
+                        div({ onClick: removeCreatedDevice, class: 'input-group-addon removeDevice' }, '❌')
                     ),
-                    label({
-                            class: 'btn btn-default btn-file',
-                            style: 'margin-top:10px'
-                        },
-                        span({
-                            class: 'deviceImageLabel'
-                        }, 'Select Picture'),
+                    label({ class: 'btn btn-default btn-file', style: 'margin-top:10px' },
+                        span({ class: 'deviceImageLabel' }, 'Select Picture'),
                         input({
                             onChange: pictureSelected,
                             type: 'file',
@@ -138,8 +125,8 @@ function deviceInputFieldClicked() {
             // remove the animation so it does not slide in again when clicking through the accordion
             container.firstChild.className = "form-group";
         });
-
     }
+    
 }
 
 function generateInitialAttributeForm() {
@@ -147,27 +134,17 @@ function generateInitialAttributeForm() {
     const devices = Object.keys(devicesData);
 
     devices.forEach(function (device, index) {
-
         // set a counter in our array so we can keep track of the different attributes
         numberOfAttributesCreated[device] = 1;
-
         const attributeId = `${device}/attribute${numberOfAttributesCreated[device]}`;
 
         // create the a form for each device entered
         const node =
-            div({
-                    'data-device': device
-                },
+            div({ 'data-device': device },
                 h2({}, device),
-                div({
-                        class: 'form-group'
-                    },
-                    div({
-                            class: 'input-group'
-                        },
-                        div({
-                            class: 'input-group-addon'
-                        }, 'Attribute ' + numberOfAttributesCreated[device]),
+                div({ class: 'form-group' },
+                    div({ class: 'input-group' },
+                        div({ class: 'input-group-addon' }, 'Attribute ' + numberOfAttributesCreated[device]),
                         input({
                             onClick: attributeInputFieldClicked,
                             type: 'text',
@@ -175,9 +152,7 @@ function generateInitialAttributeForm() {
                             id: attributeId,
                             placeholder: 'Attribute Name (No spaces)'
                         }),
-                        div({
-                            class: 'input-group-addon removeAttribute'
-                        }, '❌')
+                        div({ class: 'input-group-addon removeAttribute' }, '❌')
                     )
                 )
             );
@@ -189,6 +164,7 @@ function generateInitialAttributeForm() {
 }
 
 function submitDevices() {
+    
     devicesData = {};
     removeElements('.addAttributes div[data-device]');
 
@@ -201,26 +177,12 @@ function submitDevices() {
 
     // if object is empty
     if (Object.keys(devicesData).length === 0 && devicesData.constructor === Object) {
-        $.notify({
-            // options
-            message: 'Please fill in at least 1 device.'
-        }, {
-            // settings
-            type: 'danger'
-        });
-
+        $.notify({ message: 'Please fill in at least 1 device.'}, { type: 'danger' });
     } else {
         generateInitialAttributeForm();
-
-        $.notify({
-            // options
-            message: 'Devices saved succesfully!'
-        }, {
-            // settings
-            type: 'success'
-        });
-
         generateImagesInControlPanel();
+
+        $.notify({ message: 'Devices saved succesfully!' }, { type: 'success' });
 
         $('#collapseCreateDevices').collapse('hide');
         $('#collapseAddAttributes').collapse('show');
@@ -237,7 +199,7 @@ function generateImagesInControlPanel() {
         // create image for every device
         const image =
             img({
-                src: devicePictures[index],
+                src: devicePictures[index] || '/img/placeholder.png',
                 id: device,
                 style: "width:150px;height:150px;border-radius:50%;border:2px solid #F2F2F2;margin-left:5px"
             });
@@ -259,7 +221,7 @@ function pictureSelected(e) {
     if (fileName)
         e.target.previousElementSibling.innerHTML = fileName;
     else
-        e.target.previousElementSibling.innerHTML = "Select Picture (Optional) ...";
+        e.target.previousElementSibling.innerHTML = "Select Picture ...";
 
     // read image url and push it to pictures array
     if (fileInput.files && fileInput.files[0]) {
@@ -275,11 +237,13 @@ function pictureSelected(e) {
 // ---- functions needed in the create attributes panel ---- //
 
 function removeCreatedAttribute(e) {
+    
     const elementToBeRemoved = e.path[2];
     const parentElement = e.path[3];
-    const device = e.path[3].dataset.device;
+    const device = parentElement.dataset.device;
     parentElement.removeChild(elementToBeRemoved);
     numberOfAttributesCreated[device]--;
+    
 }
 
 function attributeInputFieldClicked(e) {
@@ -293,15 +257,9 @@ function attributeInputFieldClicked(e) {
     const attributeId = `${device}/attribute${numberOfAttributesCreated[device]}`;
 
     const container =
-        div({
-                class: 'form-group animated slideInRight'
-            },
-            div({
-                    class: 'input-group'
-                },
-                div({
-                    class: 'input-group-addon'
-                }, "Attribute " + numberOfAttributesCreated[device]),
+        div({ class: 'form-group animated slideInRight' },
+            div({ class: 'input-group' },
+                div({ class: 'input-group-addon' }, "Attribute " + numberOfAttributesCreated[device]),
                 input({
                     onClick: attributeInputFieldClicked,
                     type: 'text',
@@ -309,10 +267,7 @@ function attributeInputFieldClicked(e) {
                     id: attributeId,
                     placeholder: 'Attribute Name (No spaces)'
                 }),
-                div({
-                    onClick: removeCreatedAttribute,
-                    class: 'input-group-addon removeAttribute'
-                }, '❌')
+                div({ onClick: removeCreatedAttribute, class: 'input-group-addon removeAttribute' }, '❌')
             )
         );
 
@@ -325,6 +280,7 @@ function attributeInputFieldClicked(e) {
 }
 
 function dataTypeSelected() {
+    
     const attribute = this.dataset.attribute;
     const selectedValue = this.value;
     const categoryInput = document.querySelector('input[data-attribute=' + attribute + ']');
@@ -344,6 +300,7 @@ function dataTypeSelected() {
         categoryInput.style.display = "none";
         rangeInput.style.display = "none";
     }
+    
 }
 
 function generateDataValuesForm() {
@@ -352,9 +309,7 @@ function generateDataValuesForm() {
 
     devices.forEach(function (device) {
         // create the container
-        const container = div({
-                'data-device': device
-            },
+        const container = div({ 'data-device': device },
             h2({}, device)
         );
 
@@ -388,10 +343,7 @@ function generateDataValuesForm() {
 
             // input field to enter numerical values
             const rangeInput =
-                div({
-                        style: 'display:none',
-                        'data-attribute': attribute
-                    },
+                div({ style: 'display:none', 'data-attribute': attribute },
                     p({}, 'From'),
                     input({
                         style: 'width:100%',
@@ -414,12 +366,8 @@ function generateDataValuesForm() {
 
 
             const dataValueForm =
-                form({
-                        class: 'form-inline'
-                    },
-                    p({
-                        class: 'attribute'
-                    }, attribute),
+                form({ class: 'form-inline' },
+                    p({ class: 'attribute' }, attribute),
                     dataTypesDropDown,
                     categoryInput,
                     rangeInput
@@ -457,13 +405,7 @@ function submitAttributes() {
 
     generateDataValuesForm();
 
-    $.notify({
-        // options
-        message: 'Attributes saved succesfully!'
-    }, {
-        // settings
-        type: 'success'
-    });
+    $.notify({ message: 'Attributes saved succesfully!' }, { type: 'success' });
 
     $('#collapseAddAttributes').collapse('hide');
     $('#collapseDataValues').collapse('show');
@@ -483,7 +425,6 @@ function submitDataValues() {
 
         // loop through different attributes and write the selections to our main object, devicesData
         attributes.forEach(function (attribute) {
-
             const attributeName = attribute.innerHTML;
             const dataTypesDropdown = Array.from(device.querySelectorAll('select[data-attribute=' + attributeName + ']'));
             const currentAttribute = devicesData[deviceName][attributeName];
@@ -541,13 +482,7 @@ function submitDataValues() {
 
     generateControlPanel();
 
-    $.notify({
-        // options
-        message: 'Data Values saved succesfully!'
-    }, {
-        // settings
-        type: 'success'
-    });
+    $.notify({ message: 'Data Values saved succesfully!' }, { type: 'success' });
 
     $('#collapseDataValues').collapse('hide');
     $('#collapseSDSSetup').collapse('show');
@@ -557,13 +492,7 @@ function submitDataValues() {
 
 function skipSds() {
 
-    $.notify({
-        // options
-        message: 'No SDS project!'
-    }, {
-        // settings
-        type: 'success'
-    });
+    $.notify({ message: 'No SDS project!' }, { type: 'success' });
 
     $('#collapseControlPanel').collapse('show');
     $('#collapseSDSSetup').collapse('hide');
@@ -583,13 +512,7 @@ function submitSds() {
     // store the input stream name
     sdsSettings.inputStreamName = document.querySelector('.sdsInputStreamName').value;
 
-    $.notify({
-        // options
-        message: 'SDS settings saved!'
-    }, {
-        // settings
-        type: 'success'
-    });
+    $.notify({ message: 'SDS settings saved!' }, { type: 'success' });
 
     $('#collapseControlPanel').collapse('show');
     $('#collapseSDSSetup').collapse('hide');
@@ -644,32 +567,20 @@ function generateControlPanel() {
                     'data-attribute': value.attributeName,
                     'data-device': value.deviceName
                 },
-                p({
-                    style: 'padding-left:15px'
-                }, "Fix value for " + value.attributeName + " (" + value.deviceName + "):"),
-                div({
-                        class: 'col-md-9'
-                    },
+                p({ style: 'padding-left:15px' }, "Fix value for " + value.attributeName + " (" + value.deviceName + "):"),
+                div({ class: 'col-md-9' },
                     select({
                             class: 'form-control',
                             'data-attribute': value.attributeName,
                             'data-device': value.deviceName
                         },
-                        option({
-                            value: '--'
-                        }, '--'),
-                        option({
-                            value: 'true'
-                        }, 'true'),
-                        option({
-                            value: 'false'
-                        }, 'false')
+                        option({ value: '--' }, '--'),
+                        option({ value: 'true' }, 'true'),
+                        option({ value: 'false' }, 'false')
 
                     )
                 ),
-                div({
-                        class: 'col-md-3'
-                    },
+                div({ class: 'col-md-3' },
                     button({
                         onClick: nudge,
                         class: 'btn btn-danger btn-block nudge',
@@ -692,9 +603,7 @@ function generateControlPanel() {
                     'data-attribute': value.attributeName,
                     'data-device': value.deviceName
                 },
-                option({
-                    value: '--'
-                }, '--')
+                option({ value: '--' }, '--')
             );
 
         const container =
@@ -715,9 +624,7 @@ function generateControlPanel() {
         const categories = value.categories;
 
         categories.forEach(function (category) {
-            const opt = option({
-                value: category
-            }, category);
+            const opt = option({ value: category }, category);
             dropdown.appendChild(opt);
         });
     });
@@ -727,6 +634,7 @@ function generateControlPanel() {
 // ---- functions needed for the control panel ---- //
 
 function sliderValueChanged(e) {
+    
     const attribute = this.dataset.attribute;
     const device = this.dataset.device;
     const inputField = document.querySelector('input[data-attribute=' + attribute + '][data-device=' + device + ']');
@@ -736,9 +644,11 @@ function sliderValueChanged(e) {
 
     devicesData[device][attribute].min = min;
     devicesData[device][attribute].max = max;
+    
 }
 
 function nudge(e) {
+    
     const device = this.dataset.device;
     const attribute = this.dataset.attribute;
     const select = document.querySelector('select[data-device=' + device + '][data-attribute=' + attribute + ']');
@@ -770,6 +680,9 @@ function nudge(e) {
 function startStreaming() {
 
     if (isSdsProject) {
+        
+        const stream = stream();
+        
         const url = "http://" + sdsSettings.serverName + ":9093/1/authorization";
         const credentials = [
             {
@@ -801,8 +714,6 @@ function startStreaming() {
             // slice the first chars and the last so we only keep the pure token
             const token = JSON.stringify(response).slice(18, -5) + '"';
 
-            console.log(getDataToSend());
-
             const i = setInterval(function () {
                 let settings = {
                     "async": true,
@@ -829,6 +740,7 @@ function startStreaming() {
 }
 
 function flushDb() {
+    
     let settings = {
         "async": true,
         "url": '/simulator/data/delete',
@@ -840,10 +752,12 @@ function flushDb() {
 
     $.ajax(settings).done(function (response) {
         console.log("Success: " + response);
-    });     
+    }); 
+    
 }
 
 function stopStreaming() {
+    
     clearInterval(streamingInterval[0]);
     // reset to empty array
     streamingInterval = [];
@@ -851,6 +765,7 @@ function stopStreaming() {
     if (!isSdsProject) {
         flushDb();
     }
+    
 }
 
 function controlPanelDropDownSelected(e) {
@@ -897,7 +812,7 @@ function getDataToSend() {
             // put a timestamp in the data object
             currentAttribute["timestamp"] = new Date().toISOString();
 
-            // put that in the array
+            // put that in the array (because that is the format that SDS expects: array of objects)
             dataToBeSend.push(currentAttribute);
         });
     });
