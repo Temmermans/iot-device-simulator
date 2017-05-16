@@ -970,8 +970,6 @@ function startStreaming() {
 
     if (isSdsProject) {
 
-        var stream = stream();
-
         var url = "http://" + sdsSettings.serverName + ":9093/1/authorization";
         var credentials = [{
             "privilege": "write",
