@@ -688,8 +688,6 @@ function startStreaming() {
 
     if (isSdsProject) {
         
-        const stream = stream();
-        
         const url = "http://" + sdsSettings.serverName + ":9093/1/authorization";
         const credentials = [
             {
