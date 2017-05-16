@@ -658,7 +658,8 @@ function nudge(e) {
     
     const device = this.dataset.device;
     const attribute = this.dataset.attribute;
-    const select = document.querySelector('select[data-device=' + device + '][data-attribute=' + attribute + ']');
+    const controlPanel = document.querySelector('.controlPanel');
+    const select = controlPanel.querySelector('select[data-device=' + device + '][data-attribute=' + attribute + ']');
 
     // animate the corresponding picture
     // grab corresponding image
