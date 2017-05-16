@@ -627,9 +627,11 @@ function attributeInputFieldClicked(e) {
 function dataTypeSelected() {
 
     var attribute = this.dataset.attribute;
+    var device = this.dataset.device;
+    var form = document.querySelector('form[data-attribute="' + attribute + '/' + device + '"]');
     var selectedValue = this.value;
-    var categoryInput = document.querySelector('input[data-attribute=' + attribute + ']');
-    var rangeInput = document.querySelector('div[data-attribute=' + attribute + ']');
+    var categoryInput = form.querySelector('input[data-attribute=' + attribute + ']');
+    var rangeInput = form.querySelector('div[data-attribute=' + attribute + ']');
 
     if (selectedValue === "Number") {
         categoryInput.style.display = "none";
@@ -663,12 +665,14 @@ function generateDataValuesForm() {
             var dataTypesDropDown = select({
                 onChange: dataTypeSelected,
                 class: 'form-control',
-                'data-attribute': attribute
+                'data-attribute': attribute,
+                'data-device': device
             }, option({}, "String"), option({}, "Number"), option({}, "Boolean"), option({}, "GPS-String"));
 
             // input field to enter categorical values
             var categoryInput = input({
                 'data-attribute': attribute,
+                'data-device': device,
                 style: 'width:100%;margin-top:10px;',
                 type: 'text',
                 class: 'form-control',
@@ -680,6 +684,7 @@ function generateDataValuesForm() {
             var rangeInput = div({ style: 'display:none', 'data-attribute': attribute }, p({}, 'From'), input({
                 style: 'width:100%',
                 'data-attribute': attribute,
+                'data-device': device,
                 type: 'number',
                 class: 'form-control',
                 id: 'range-from',
@@ -687,13 +692,14 @@ function generateDataValuesForm() {
             }), p({}, 'To'), input({
                 style: 'width:100%',
                 'data-attribute': attribute,
+                'data-device': device,
                 type: 'number',
                 class: 'form-control',
                 id: 'range-to',
                 placeholder: 'To'
             }));
 
-            var dataValueForm = form({ class: 'form-inline' }, p({ class: 'attribute' }, attribute), dataTypesDropDown, categoryInput, rangeInput);
+            var dataValueForm = form({ class: 'form-inline', 'data-attribute': attribute + '/' + device }, p({ class: 'attribute' }, attribute), dataTypesDropDown, categoryInput, rangeInput);
 
             container.appendChild(dataValueForm);
         });
@@ -921,7 +927,8 @@ function sliderValueChanged(e) {
 
     var attribute = this.dataset.attribute;
     var device = this.dataset.device;
-    var inputField = document.querySelector('input[data-attribute=' + attribute + '][data-device=' + device + ']');
+    var controlPanel = document.querySelector('.controlPanel');
+    var inputField = controlPanel.querySelector('input[data-attribute=' + attribute + '][data-device=' + device + ']');
     var minMax = inputField.dataset.value;
     var min = minMax.split(',')[0];
     var max = minMax.split(',')[1];

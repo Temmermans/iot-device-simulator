@@ -282,9 +282,11 @@ function attributeInputFieldClicked(e) {
 function dataTypeSelected() {
     
     const attribute = this.dataset.attribute;
+    const device = this.dataset.device;
+    const form = document.querySelector('form[data-attribute="' +attribute+ '/' +device+ '"]');
     const selectedValue = this.value;
-    const categoryInput = document.querySelector('input[data-attribute=' + attribute + ']');
-    const rangeInput = document.querySelector('div[data-attribute=' + attribute + ']');
+    const categoryInput = form.querySelector('input[data-attribute=' + attribute + ']');
+    const rangeInput = form.querySelector('div[data-attribute=' + attribute + ']');
 
     if (selectedValue === "Number") {
         categoryInput.style.display = "none";
@@ -322,7 +324,8 @@ function generateDataValuesForm() {
                 select({
                         onChange: dataTypeSelected,
                         class: 'form-control',
-                        'data-attribute': attribute
+                        'data-attribute': attribute,
+                        'data-device': device
                     },
                     option({}, "String"),
                     option({}, "Number"),
@@ -334,6 +337,7 @@ function generateDataValuesForm() {
             const categoryInput =
                 input({
                     'data-attribute': attribute,
+                    'data-device': device,
                     style: 'width:100%;margin-top:10px;',
                     type: 'text',
                     class: 'form-control',
@@ -348,6 +352,7 @@ function generateDataValuesForm() {
                     input({
                         style: 'width:100%',
                         'data-attribute': attribute,
+                        'data-device': device,
                         type: 'number',
                         class: 'form-control',
                         id: 'range-from',
@@ -357,6 +362,7 @@ function generateDataValuesForm() {
                     input({
                         style: 'width:100%',
                         'data-attribute': attribute,
+                        'data-device': device,
                         type: 'number',
                         class: 'form-control',
                         id: 'range-to',
@@ -366,7 +372,7 @@ function generateDataValuesForm() {
 
 
             const dataValueForm =
-                form({ class: 'form-inline' },
+                form({ class: 'form-inline', 'data-attribute': `${attribute}/${device}` },
                     p({ class: 'attribute' }, attribute),
                     dataTypesDropDown,
                     categoryInput,
@@ -637,7 +643,8 @@ function sliderValueChanged(e) {
     
     const attribute = this.dataset.attribute;
     const device = this.dataset.device;
-    const inputField = document.querySelector('input[data-attribute=' + attribute + '][data-device=' + device + ']');
+    const controlPanel = document.querySelector('.controlPanel');
+    const inputField = controlPanel.querySelector('input[data-attribute=' + attribute + '][data-device=' + device + ']');
     const minMax = inputField.dataset.value;
     const min = minMax.split(',')[0];
     const max = minMax.split(',')[1];
