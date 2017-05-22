@@ -1,4 +1,4 @@
-![Logo delaware](./readme-images/Logo_delaware_FullColor_digital.png)
+[![Logo delaware](./readme-images/Logo_delaware_FullColor_digital.png)](http://www.delawareconsulting.com/en-us)
 
 ____
 
